@@ -151,6 +151,11 @@ repositories {
         url 'https://www.cursemaven.com/'
     }
     maven { url = "https://dvs1.progwml6.com/files/maven" }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 dependencies {
@@ -161,9 +166,9 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.3-5.1.2.0:api")
 
 
-//    compileOnly fg.deobf("mezz.jei:jei-1.19.3-common-api:${jei_version}")
-//    compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge-api:${jei_version}")
-//    runtimeOnly fg.deobf("mezz.jei:jei-1.19.3-forge:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-1.19.3-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.19.3-forge:${jei_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
