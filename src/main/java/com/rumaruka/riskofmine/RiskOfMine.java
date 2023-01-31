@@ -1,11 +1,10 @@
 package com.rumaruka.riskofmine;
 
 
+import com.rumaruka.riskofmine.client.screen.BaseScreen;
+import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,14 +16,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeCoreAPI;
@@ -37,20 +33,21 @@ import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 @Mod(MODID)
 public class RiskOfMine {
     private static RiskOfMine instance;
-    public static final String MODID ="riskofmine";
+    public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
 
     private static final ModList MOD_LIST = ModList.get();
+
     public RiskOfMine() {
-        instance=this;
+        instance = this;
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         TimeCoreAPI.setup(this);
-       // ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
-       // eventBus.register(ROMConfig.class);
+        // ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
+        // eventBus.register(ROMConfig.class);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
-       // ROMSounds.REGISTER.register(eventBus);
+        // ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
@@ -68,9 +65,10 @@ public class RiskOfMine {
     private void setup(final FMLCommonSetupEvent event) {
 //        MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
         if (MOD_LIST.isLoaded("jeresources")) {
-           // ROMJerPlugin.setup(event);
+            // ROMJerPlugin.setup(event);
         }
     }
+
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
@@ -78,7 +76,7 @@ public class RiskOfMine {
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LEGENDARY_CHEST, RenderType.cutoutMipped());
 //
-//        MenuScreens.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
+        MenuScreens.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
@@ -91,6 +89,7 @@ public class RiskOfMine {
 
 
     }
+
     private void enqueueIMC(InterModEnqueueEvent event) {
         //ROMConfig.General.sizeCurio.get()
         for (SlotTypePreset preset : SlotTypePreset.values()) {
@@ -99,20 +98,23 @@ public class RiskOfMine {
 
 
     }
+
     @SubscribeEvent
-    public static void renderItemHud(RenderPlayerEvent event){
+    public static void renderItemHud(RenderPlayerEvent event) {
         PlayerRenderer playerRenderer = event.getRenderer();
 
-       // playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+        // playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
 
     }
+
     public static RiskOfMine instance() {
         return instance;
     }
 
-    public static ResourceLocation rl(String path){
-        return new ResourceLocation(MODID,path);
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(MODID, path);
     }
+
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
