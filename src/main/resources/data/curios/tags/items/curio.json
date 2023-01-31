@@ -1,19 +1,29 @@
 {
-  "replace": false,
+  "replace": "false",
   "values": [
-    "riskofmine:bustling_fungus",
-    "riskofmine:armor_piercing_rounds",
-    "riskofmine:monster_tooth",
-    "riskofmine:gasoline",
-    "riskofmine:crowbar",
-    "riskofmine:energy_drink",
-    "riskofmine:chronobauble",
-    "riskofmine:stun_grenade",
-    "riskofmine:old_war_stealthkit",
-    "riskofmine:sticky_bomb",
-    "riskofmine:focus_crystal",
-    "riskofmine:shaped_glass"
+    {
+      "id": "riskofmine:bustling_fungus",
+      "required": false
+    },
+    {
+      "id": "riskofmine:armor_piercing_rounds",
+      "required": false
+    },
+    {
+      "id": "cyclic:charm_luck",
+      "required": false
+    },
+    {
+      "id": "cyclic:charm_xp_speed",
+      "required": false
+    },
+    {
+      "id": "cyclic:charm_xp_blocker",
+      "required": false
+    },
+    {
+      "id": "cyclic:antigravity",
+      "required": false
+    }
   ]
-
-
 }

@@ -21,7 +21,7 @@ public class ModSetup {
     @SubscribeEvent
     public static void registerTabs(CreativeModeTabEvent.Register register) {
         tabRiskofMine = register.registerCreativeModeTab(new ResourceLocation(MODID,"riskofmine"),builder -> builder
-                .icon(()-> new ItemStack(Items.ACACIA_DOOR))
+                .icon(()-> new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS))
                 .title(Component.translatable("itemGroup.riskofmine"))
                 .displayItems((featureFlags, output, hasOp) -> {
                    ROMItems.getAllItem().forEach(output::accept);

@@ -33,7 +33,7 @@ public class ROMJeiPlugin implements IModPlugin {
     public void registerIngredientInfo(IRecipeRegistration registration, Item ingredient) {
 
         registration.addIngredientInfo(new ItemStack(ingredient), VanillaTypes.ITEM_STACK,
-                Component.translatable("jei." + RiskOfMine.MODID + ".item." + ingredient.getDescription().getString().substring(16) + ".desc"));
+                Component.translatable("jei." + ingredient.getDescriptionId() + ".desc"));
 
 
     }

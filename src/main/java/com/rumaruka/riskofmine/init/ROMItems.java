@@ -1,6 +1,8 @@
 package com.rumaruka.riskofmine.init;
 
 import com.google.common.collect.Lists;
+import com.rumaruka.riskofmine.common.items.common.ArmorPiercingRoundsItem;
+import com.rumaruka.riskofmine.common.items.common.BustlingFungusItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
@@ -10,12 +12,14 @@ import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 import java.util.ArrayList;
 
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
+import static com.rumaruka.riskofmine.RiskOfMine.tl;
 import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @AutoRegistrable.Entries("item")
 public class ROMItems {
     public static Item TEST_DIAMOND = promise();
-
+    public static  ArmorPiercingRoundsItem ARMOR_PIERCING_ROUNDS = promise();
+    public static BustlingFungusItem BUSTLING_FUNGUS = promise();
     private static class Init {
         @AutoRegistrable
         private static final ItemRegister REGISTER = new ItemRegister(MODID);
@@ -24,15 +28,18 @@ public class ROMItems {
         private static void register() {
             REGISTER.register("test_diamond", () -> new Item(new Item.Properties())).tab(CreativeModeTabs.REDSTONE_BLOCKS)
                     .defaultModel(new TextureLocation("minecraft", "item/diamond"));
+
+            REGISTER.register("armor_piercing_rounds", ArmorPiercingRoundsItem::new).defaultModel(tl("item/armor_piercing_rounds"));
+            REGISTER.register("bustling_fungus", BustlingFungusItem::new).defaultModel(tl("item/bustling_fungus"));
         }
     }
 
     public static ArrayList<Item> getAllItem() {
         return (Lists.newArrayList(
-                TEST_DIAMOND
+                TEST_DIAMOND,
 
-//                ARMOR_PIERCING_ROUNDS,
-//                BUSTLING_FUNGUS,
+                ARMOR_PIERCING_ROUNDS,
+                BUSTLING_FUNGUS
 //                GASOLINE,
 //                INFUSION,
 //                SHAPED_GLASS,

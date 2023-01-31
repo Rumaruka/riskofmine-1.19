@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine;
 
 
+import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -8,6 +9,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -49,11 +51,13 @@ public class RiskOfMine {
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
        // ROMSounds.REGISTER.register(eventBus);
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
             //eventBus.addListener(ROMOverlayRender::keyPressed);
         });
+        logger.info("Network Risk Of Mine setuping");
+        ROMNetwork.setup();
 
 //        ROMParticles.PARTICLES.register(eventBus);
 //        ROMEffects.EFFECTS.register(eventBus);
@@ -67,6 +71,7 @@ public class RiskOfMine {
            // ROMJerPlugin.setup(event);
         }
     }
+    @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
