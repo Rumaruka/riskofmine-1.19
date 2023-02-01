@@ -44,6 +44,12 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
         }
     }
 
+    public  void addMoney(int value){
+        money.set(money.get()+value);
+    }
+    public  void removeMoney(int value){
+        money.set(money.get()-value);
+    }
     public void detectAndSendChanges() {
         detectAndSendChanges(player.level, player);
     }

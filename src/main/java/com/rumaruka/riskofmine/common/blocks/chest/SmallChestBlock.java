@@ -36,14 +36,13 @@ public class SmallChestBlock extends GenericChestBlock{
            if (blockEntity instanceof GenericChestTE){
                player.openMenu((GenericChestTE) blockEntity);
                       player.awardStat(Stats.OPEN_CHEST);
-               if (money!=null){
+//               if (money!=null){
 //                   if(money.money.get()>=25){
-//                       money.money.set(money.money.get()-25);
+//                       money.removeMoney(25);
 //                       money.detectAndSendChanges();
-//
 //                       PiglinAi.angerNearbyPiglins(player, true);
 //                   }
-               }
+//               }
            }
         }
         return InteractionResult.CONSUME;

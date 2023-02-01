@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.init;
 
 
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
+import com.rumaruka.riskofmine.common.inventory.ChestShopInventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.registries.ForgeRegistries;
 import ru.timeconqueror.timecore.api.registry.SimpleVanillaRegister;
@@ -19,6 +20,7 @@ public class ROMContainerTypes {
 //    public static final MenuType<ChestInventory> LARGE_CHEST = promise();
 //    public static final MenuType<ChestInventory> LEGENDARY_CHEST = promise();
 //    public static final MenuType<ChestInventory>LUNAR_CHEST = promise();
+
 //    public static final MenuType<ChestShopInventory>MULTI_SHOP = promise();
 //    public static final MenuType<ChestShopInventory>EQUIPMENT_TRIPLE_BARREL = promise();
 

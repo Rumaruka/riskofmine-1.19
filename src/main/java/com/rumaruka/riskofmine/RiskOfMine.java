@@ -2,9 +2,15 @@ package com.rumaruka.riskofmine;
 
 
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
+import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
+import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
+import com.rumaruka.riskofmine.init.ROMBlocks;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +22,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -43,16 +50,17 @@ public class RiskOfMine {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         TimeCoreAPI.setup(this);
-        // ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
-        // eventBus.register(ROMConfig.class);
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
+         eventBus.register(ROMConfig.class);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         // ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
-            //eventBus.addListener(ROMOverlayRender::keyPressed);
+
         });
+        eventBus.addListener(ROMOverlayRender::registerKeys);
         logger.info("Network Risk Of Mine setuping");
         ROMNetwork.setup();
 
@@ -71,7 +79,7 @@ public class RiskOfMine {
 
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
-//        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
+       //ItemBlockRenderTypes.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
 //        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LEGENDARY_CHEST, RenderType.cutoutMipped());
@@ -93,7 +101,7 @@ public class RiskOfMine {
     private void enqueueIMC(InterModEnqueueEvent event) {
         //ROMConfig.General.sizeCurio.get()
         for (SlotTypePreset preset : SlotTypePreset.values()) {
-            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(4).build());
+            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.General.sizeCurio.get()).build());
         }
 
 
