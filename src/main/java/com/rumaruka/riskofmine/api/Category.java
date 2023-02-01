@@ -5,6 +5,7 @@ import net.minecraft.util.StringRepresentable;
 
 public enum Category implements StringRepresentable {
     DAMAGE("Damage", "damage", ChatFormatting.DARK_RED),
+    SCRAP("Scrap", "scrap", ChatFormatting.GRAY),
     UTILITY("Utility", "utility", ChatFormatting.GOLD),
     HEALING("Healing", "healing", ChatFormatting.GREEN),
 

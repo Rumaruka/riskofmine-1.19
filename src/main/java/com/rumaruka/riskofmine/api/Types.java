@@ -11,7 +11,11 @@ public enum Types implements StringRepresentable {
     LEGENDARY(2, 3, "Legendary", "legendary", 11546150, ChatFormatting.RED),
     BOSS(3, 2, "Boss", "boss", 16351261, ChatFormatting.YELLOW),
     LUNAR(4, 1, "Lunar", "lunar", 3949738, ChatFormatting.BLUE),
-    EQUIPMENT(5, 0, "Equipment", "equipment", 439738, ChatFormatting.GOLD);
+    EQUIPMENT(5, 0, "Equipment", "equipment", 439738, ChatFormatting.GOLD),
+    VOID(6,1,"Void","void",8991416, ChatFormatting.DARK_PURPLE);
+
+
+    ;
 
 
     private static final Types[] META_LOOKUP = new Types[values().length];
