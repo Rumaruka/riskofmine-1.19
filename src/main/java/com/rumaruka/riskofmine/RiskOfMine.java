@@ -1,11 +1,13 @@
 package com.rumaruka.riskofmine;
 
 
+import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
+import com.rumaruka.riskofmine.init.ROMFeatures;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -64,6 +66,8 @@ public class RiskOfMine {
 //        ROMParticles.PARTICLES.register(eventBus);
 //        ROMEffects.EFFECTS.register(eventBus);
 //        ROMEffects.POTIONS.register(eventBus);
+        ROMFeatures.registerFeatures();
+
     }
 
 
@@ -93,7 +97,6 @@ public class RiskOfMine {
     }
 
     private void enqueueIMC(InterModEnqueueEvent event) {
-        //ROMConfig.General.sizeCurio.get()
         for (SlotTypePreset preset : SlotTypePreset.values()) {
             InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.General.sizeCurio.get()).build());
         }
@@ -105,7 +108,7 @@ public class RiskOfMine {
     public static void renderItemHud(RenderPlayerEvent event) {
         PlayerRenderer playerRenderer = event.getRenderer();
 
-        // playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+        playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
 
     }
 
