@@ -1,8 +1,7 @@
 package com.rumaruka.riskofmine.common.inventory;
 
 import com.rumaruka.riskofmine.api.Chest;
-import com.rumaruka.riskofmine.api.Types;
-import com.rumaruka.riskofmine.common.inventory.slots.SingleSlot;
+
 import com.rumaruka.riskofmine.common.inventory.slots.TripleSlot;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import net.minecraft.world.Container;
@@ -38,13 +37,13 @@ public class ChestShopInventory extends AbstractContainerMenu {
 //    }
 //
 //
-//    public static @NotNull ChestShopInventory createMultiShopContainer(int windowId, Inventory playerInventory) {
-//        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, new SimpleContainer(Chest.MULTI_SHOP.size), Chest.MULTI_SHOP);
-//    }
-//
-//    public static ChestShopInventory createMultiShopContainer(int windowId, Inventory playerInventory, Container inventory) {
-//        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, inventory, Chest.MULTI_SHOP);
-//    }
+    public static @NotNull ChestShopInventory createMultiShopContainer(int windowId, Inventory playerInventory) {
+        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, new SimpleContainer(Chest.MULTI_SHOP.size), Chest.MULTI_SHOP);
+    }
+
+    public static ChestShopInventory createMultiShopContainer(int windowId, Inventory playerInventory, Container inventory) {
+        return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, inventory, Chest.MULTI_SHOP);
+    }
 
     protected ChestShopInventory(@Nullable MenuType<?> menuType, int containerId, Inventory playerInventory, Container inventory, Chest chestType) {
         super(menuType, containerId);

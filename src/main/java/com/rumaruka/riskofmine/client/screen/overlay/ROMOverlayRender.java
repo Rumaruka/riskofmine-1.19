@@ -3,7 +3,10 @@ package com.rumaruka.riskofmine.client.screen.overlay;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.rumaruka.riskofmine.RiskOfMine;
+import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
+import com.rumaruka.riskofmine.ntw.ROMNetwork;
+import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -11,6 +14,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,11 +35,18 @@ public class ROMOverlayRender {
     public static void registerKeys(RegisterKeyMappingsEvent e) {
         e.register(KEY_SHOW_OVERLAYS);
     }
-
+    @SubscribeEvent
+    public static void inputEvent(InputEvent.Key event){
+        if (mc.screen!=null)return;
+        if(KEY_SHOW_OVERLAYS.isDown()&&event.getAction()==GLFW.GLFW_PRESS){
+            ROMNetwork.getInstance().sendToServer(new OverlayPacket());
+        }
+    }
     @SubscribeEvent
     public static void renderOverlay(CustomizeGuiOverlayEvent.Chat event) {
         if (KEY_SHOW_OVERLAYS.isDown()) {
             renderNearbyMoneyDisplay(event.getPoseStack());
+            renderNearbyLunarDisplay(event.getPoseStack());
         }
     }
 
@@ -48,15 +59,34 @@ public class ROMOverlayRender {
             if (money != null) {
                 String toDisplay = getMoneyDisplay(money);
                 Color color = Color.magenta;
-                DrawHelper.drawString(stack, font, toDisplay, 27.5f, 30, color.getRGB());
+                DrawHelper.drawString(stack, font, toDisplay, 27.5f, 20, color.getRGB());
+            }
+        }
+    }
+    private static void renderNearbyLunarDisplay(PoseStack stack) {
+        stack.pushPose();
+        Player player = mc.player;
+        Font font = mc.font;
+        if (player != null && !player.isDeadOrDying()) {
+            Lunar lunar = Lunar.of(player);
+            if (lunar != null) {
+                String toDisplay = getLunarDisplay(lunar);
+                Color color = Color.magenta;
+                DrawHelper.drawString(stack, font, toDisplay,  27.5f, 30, color.getRGB());
             }
         }
     }
 
-
     private static String getMoneyDisplay(Money money) {
-        float currentMoney = money.money.get();
+        int currentMoney = money.getCurrentMoney();
         return I18n.get("riskofmine.currentmoney.name") + currentMoney;
 
     }
+
+    private static String getLunarDisplay(Lunar lunar) {
+        int currentLunar = lunar.getCurrentLunar();
+        return I18n.get("riskofmine.currentlunar.name") + currentLunar;
+
+    }
+
 }

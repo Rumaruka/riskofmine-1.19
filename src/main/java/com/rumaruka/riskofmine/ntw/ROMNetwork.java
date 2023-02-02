@@ -1,5 +1,6 @@
 package com.rumaruka.riskofmine.ntw;
 import com.rumaruka.riskofmine.ntw.helper.ISimplePacket;
+import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,16 +33,20 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 public class ROMNetwork {
     private static ROMNetwork instance = promise();
-    public final SimpleChannel network;
-    private int id = 0;
     private static final String PROTOCOL_VERSION = Integer.toString(1);
+    public static final SimpleChannel network= NetworkRegistry.ChannelBuilder.named(rl("network"))
+            .clientAcceptedVersions(PROTOCOL_VERSION::equals)
+            .serverAcceptedVersions(PROTOCOL_VERSION::equals)
+            .networkProtocolVersion(() -> PROTOCOL_VERSION)
+            .simpleChannel();
+    private static int id = 0;
+
 
     public ROMNetwork() {
-        this.network = NetworkRegistry.ChannelBuilder.named(rl("network"))
-                .clientAcceptedVersions(PROTOCOL_VERSION::equals)
-                .serverAcceptedVersions(PROTOCOL_VERSION::equals)
-                .networkProtocolVersion(() -> PROTOCOL_VERSION)
-                .simpleChannel();
+
+    }
+    public static int nextID() {
+        return id++;
     }
     public static ROMNetwork getInstance() {
         if (instance == null) {
@@ -57,6 +62,7 @@ public class ROMNetwork {
 
         instance = new ROMNetwork();
         instance.registerPacket(InventoryTopStacksSyncPacket.class, InventoryTopStacksSyncPacket::new, NetworkDirection.PLAY_TO_CLIENT);
+        network.registerMessage(nextID(), OverlayPacket.class,OverlayPacket::toBytes,OverlayPacket::new,OverlayPacket::handle);
     }
 
     /**
@@ -68,6 +74,7 @@ public class ROMNetwork {
      */
     public <MSG extends ISimplePacket> void registerPacket(Class<MSG> clazz, Function<FriendlyByteBuf, MSG> decoder, @Nullable NetworkDirection direction) {
         registerPacket(clazz, ISimplePacket::encode, decoder, ISimplePacket::handle, direction);
+
     }
 
     /**

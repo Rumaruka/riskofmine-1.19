@@ -10,7 +10,7 @@ public class ROMMathFormula {
 
     public static float powerIncreasing(float x, float y) {
 
-        return Mth.abs((float) ROMMathUtils.multiply(x, y)) / 30 - (ROMMathUtils.percent(5) + ROMMathUtils.percent(x * y));
+        return Math.abs((float) ROMMathUtils.multiply(x, y)) / 30 - (ROMMathUtils.percent(5) + ROMMathUtils.percent(x * y));
 
 
     }

@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.common.items.eqiupment;
 
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.Category;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,7 +28,7 @@ import static com.rumaruka.riskofmine.utils.ROMUtils.removeNegativeEffect;
 public class BlastShowerItem extends EquipmentBase{
     public BlastShowerItem( ) {
         super(Category.UTILITY);
-        //cooldownMinus= ROMItems.ALIEN_HEAD.cooldownMinu;
+        cooldownMinus= ROMItems.ALIEN_HEAD.cooldownMinus;
     }
 
     @Override
@@ -39,20 +40,20 @@ public class BlastShowerItem extends EquipmentBase{
 
             if (!pPlayer.getAbilities().instabuild) {
 
-//                for (int i = 0; i < pPlayer.getInventory().getContainerSize(); i++) {
-//                    ItemStack itemStack = pPlayer.getInventory().getItem(i);
-//                    if (itemStack.getItem() == ROMItems.ALIEN_HEAD) {
-//                        pPlayer.removeAllEffects();
-//                        removeNegativeEffect(pPlayer);
-//                        pPlayer.getCooldowns().addCooldown(this, 100 - cooldownMinus);
-//                        MinecraftForge.EVENT_BUS.register(new ProjectileRemoveEvent());
-//                    }
-//
-//                }
+                for (int i = 0; i < pPlayer.getInventory().getContainerSize(); i++) {
+                    ItemStack itemStack = pPlayer.getInventory().getItem(i);
+                    if (itemStack.getItem() == ROMItems.ALIEN_HEAD) {
+                        pPlayer.removeAllEffects();
+                        removeNegativeEffect(pPlayer);
+                        pPlayer.getCooldowns().addCooldown(this, ROMConfig.General.cooldownEq.get() - cooldownMinus);
+                        MinecraftForge.EVENT_BUS.register(new ProjectileRemoveEvent());
+                    }
+
+                }
                 pPlayer.removeAllEffects();
                 removeNegativeEffect(pPlayer);
                 MinecraftForge.EVENT_BUS.register(new ProjectileRemoveEvent());
-                pPlayer.getCooldowns().addCooldown(this, 100);
+                pPlayer.getCooldowns().addCooldown(this, ROMConfig.General.cooldownEq.get());
 
             }
         }
@@ -78,7 +79,7 @@ public class BlastShowerItem extends EquipmentBase{
 
 
     @Mod.EventBusSubscriber(modid = RiskOfMine.MODID)
-    public class ProjectileRemoveEvent {
+    public static class ProjectileRemoveEvent {
         @SubscribeEvent
         public void onManipulationProjectiles(ProjectileImpactEvent event) {
             Player playerEntity = Minecraft.getInstance().player;

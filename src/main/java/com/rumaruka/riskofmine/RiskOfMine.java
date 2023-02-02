@@ -5,12 +5,9 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.init.ROMBlocks;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,7 +48,7 @@ public class RiskOfMine {
         MinecraftForge.EVENT_BUS.register(this);
         TimeCoreAPI.setup(this);
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
-         eventBus.register(ROMConfig.class);
+        eventBus.register(ROMConfig.class);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         // ROMSounds.REGISTER.register(eventBus);
@@ -79,10 +76,7 @@ public class RiskOfMine {
 
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
-       //ItemBlockRenderTypes.setRenderLayer(ROMBlocks.SMALL_CHEST, RenderType.cutoutMipped());
-//        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LARGE_CHEST, RenderType.cutoutMipped());
-//        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LUNAR_CHEST, RenderType.cutoutMipped());
-//        ItemBlockRenderTypes.setRenderLayer(ROMBlocks.LEGENDARY_CHEST, RenderType.cutoutMipped());
+
 //
         MenuScreens.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
@@ -90,7 +84,7 @@ public class RiskOfMine {
 //        MenuScreens.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
 
 
-//        MenuScreens.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
+        MenuScreens.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
 //        MenuScreens.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
 //
 //        ROMEntityRegister.renderEntity();

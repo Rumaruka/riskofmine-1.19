@@ -16,19 +16,19 @@ import ru.timeconqueror.timecore.common.capability.owner.serializer.CapabilityOw
 import ru.timeconqueror.timecore.common.capability.property.CoffeeProperty;
 import ru.timeconqueror.timecore.common.capability.property.serializer.IntPropertySerializer;
 
-public class Money extends CoffeeCapabilityInstance<Entity> {
-    public final CoffeeProperty<Integer> money = prop("money", 0, IntPropertySerializer.INSTANCE).synced();
+public class Lunar extends CoffeeCapabilityInstance<Entity> {
+    public final CoffeeProperty<Integer> lunar = prop("lunar", 0, IntPropertySerializer.INSTANCE).synced();
 
     private final Player player;
 
-    public Money(Player player) {
+    public Lunar(Player player) {
         this.player = player;
     }
 
     @NotNull
     @Override
     public Capability<? extends CoffeeCapabilityInstance<Entity>> getCapability() {
-        return ROMCap.MONEY;
+        return ROMCap.LUNAR;
     }
 
     @NotNull
@@ -45,16 +45,16 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
         }
     }
 
-    public void addMoney(int value) {
-        money.set(money.get() + value);
+    public void addLunar(int value) {
+        lunar.set(lunar.get() + value);
     }
 
-    public void removeMoney(int value) {
-        money.set(money.get() - value);
+    public void removeLunar(int value) {
+        lunar.set(lunar.get() - value);
     }
 
-    public int getCurrentMoney() {
-        return money.get();
+    public int getCurrentLunar() {
+        return lunar.get();
     }
 
     public void detectAndSendChanges() {
@@ -66,8 +66,8 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
     }
 
     @Nullable
-    public static Money of(Player player) {
-        LazyOptional<Money> cap = player.getCapability(ROMCap.MONEY);
+    public static Lunar of(Player player) {
+        LazyOptional<Lunar> cap = player.getCapability(ROMCap.LUNAR);
         if (cap.isPresent()) {
             return cap.orElseThrow(IllegalStateException::new);
         }

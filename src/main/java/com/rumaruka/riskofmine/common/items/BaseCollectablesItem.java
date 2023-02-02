@@ -12,7 +12,7 @@ public class BaseCollectablesItem extends Item implements ICurioItem {
     private final Category categoryEnum;
 
     private final int sizeStack;
-    public int cooldownMinus;
+
 
     public BaseCollectablesItem(Types type, Category category,int size) {
         super(new Properties().stacksTo(size));

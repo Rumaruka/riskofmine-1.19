@@ -1,5 +1,6 @@
 package com.rumaruka.riskofmine.api;
 
+import com.rumaruka.riskofmine.init.ROMBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
@@ -70,8 +71,8 @@ public enum Chest implements StringRepresentable {
 
     public static Block get(Chest type) {
         switch (type) {
-//            case SMALL:
-//                return ROMBlocks.SMALL_CHEST;
+            case SMALL:
+                return ROMBlocks.SMALL_CHEST;
 //            case LARGE:
 //                return ROMBlocks.LARGE_CHEST;
 //            case LEGENDARY:
@@ -88,8 +89,8 @@ public enum Chest implements StringRepresentable {
 //                return ROMBlocks.UTILITY_CHEST;
 //            case LUNAR:
 //                return ROMBlocks.LUNAR_CHEST;
-//            case MULTI_SHOP:
-//                return ROMBlocks.MULTI_SHOP;
+            case MULTI_SHOP:
+                return ROMBlocks.MULTI_SHOP;
 //            case EQUIPMENT_TRIPLE_BARREL:
 //                return ROMBlocks.EQUIPMENT_TRIPLE_BARREL;
             default:

@@ -28,9 +28,18 @@ public class ROMUtils {
 
     private static MobEffectCategory category;
     private final List<Category> categoryEnum = Lists.newArrayList();
-
+    private static final Minecraft mc = Minecraft.getInstance();
     public static int durOld;
 
+
+    public static Minecraft getMc(){
+        return mc;
+    }
+
+
+    public static Player getPlayer(){
+        return mc.player;
+    }
 
 
     public static ItemStack getStack(Item item) {
