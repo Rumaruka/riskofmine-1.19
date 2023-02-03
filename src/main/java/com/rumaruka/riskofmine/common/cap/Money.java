@@ -44,15 +44,22 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
             channel.send(PacketDistributor.PLAYER.with(() -> serverPlayer), data);
         }
     }
-
+    public void setMoney(int value) {
+        if (getCurrentMoney() != value) {
+            money.set(value);
+        }
+    }
+    public static int getMaxMoney(Player player) {
+        return Integer.MAX_VALUE;
+    }
     public void addMoney(int value) {
-        money.set(money.get() + value);
+
+        setMoney(Math.min(getCurrentMoney() + value, getMaxMoney(player)));
     }
 
-    public void removeMoney(int value) {
-        money.set(money.get() - value);
+    public boolean hasMoney(int price) {
+        return getCurrentMoney() >= price;
     }
-
     public int getCurrentMoney() {
         return money.get();
     }

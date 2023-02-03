@@ -1,6 +1,8 @@
 package com.rumaruka.riskofmine;
 
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
@@ -9,13 +11,18 @@ import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMFeatures;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
+import com.rumaruka.riskofmine.ntw.cmd.MoneyAddCommand;
+import com.rumaruka.riskofmine.ntw.cmd.MoneySetCommand;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -91,8 +98,15 @@ public class RiskOfMine {
         MenuScreens.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
 //        MenuScreens.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
 //
-//        ROMEntityRegister.renderEntity();
+        ROMEntityRegister.renderEntity();
 
+
+    }
+    @SubscribeEvent
+    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+        MoneyAddCommand.register(dispatcher);
+        MoneySetCommand.register(dispatcher);
 
     }
 
@@ -108,7 +122,9 @@ public class RiskOfMine {
     public static void renderItemHud(RenderPlayerEvent event) {
         PlayerRenderer playerRenderer = event.getRenderer();
 
-        playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+       playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+
+
 
     }
 

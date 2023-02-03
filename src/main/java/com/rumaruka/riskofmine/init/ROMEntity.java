@@ -1,0 +1,33 @@
+package com.rumaruka.riskofmine.init;
+
+import com.rumaruka.riskofmine.common.blocks.chest.SmallChestBlock;
+import com.rumaruka.riskofmine.common.blocks.shop.MultiShopBlock;
+import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import ru.timeconqueror.timecore.api.registry.BlockRegister;
+import ru.timeconqueror.timecore.api.registry.EntityRegister;
+import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
+
+import static com.rumaruka.riskofmine.RiskOfMine.MODID;
+import static ru.timeconqueror.timecore.api.util.Hacks.promise;
+
+@AutoRegistrable.Entries("entity_type")
+public class ROMEntity {
+
+    public static final EntityType<HealthOrbEntity> HEALTH_ORB=promise();
+
+    @AutoRegistrable
+    private static final EntityRegister REGISTER = new EntityRegister(MODID);
+
+    @AutoRegistrable.Init
+    private static void register() {
+        REGISTER.register("health_orb",
+                EntityType.Builder.<HealthOrbEntity>of(HealthOrbEntity::new, MobCategory.MISC)
+                        .setTrackingRange(80)
+                        .setShouldReceiveVelocityUpdates(true)
+                        .sized(3.5F, 3.5F).updateInterval(20));
+
+
+    }
+}
