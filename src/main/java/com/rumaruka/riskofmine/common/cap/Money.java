@@ -56,6 +56,10 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
 
         setMoney(Math.min(getCurrentMoney() + value, getMaxMoney(player)));
     }
+    public void removeMoney(int value) {
+
+        setMoney(Math.min(getCurrentMoney() - value, getMaxMoney(player)));
+    }
 
     public boolean hasMoney(int price) {
         return getCurrentMoney() >= price;
