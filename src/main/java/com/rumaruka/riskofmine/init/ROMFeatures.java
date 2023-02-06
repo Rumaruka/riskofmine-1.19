@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ROMFeatures {
     private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, RiskOfMine.MODID);
-    public static final RegistryObject<SmallChestFeature>SMALL_CHEST_FEATURE = FEATURES.register("small_chest",()->new SmallChestFeature(NoneFeatureConfiguration.CODEC));
+    public static  RegistryObject<SmallChestFeature>SMALL_CHEST_FEATURE = FEATURES.register("small_chest",()->new SmallChestFeature(NoneFeatureConfiguration.CODEC));
     public static void registerFeatures() {
         FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }

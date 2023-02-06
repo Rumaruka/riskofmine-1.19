@@ -13,7 +13,6 @@ import com.rumaruka.riskofmine.init.ROMFeatures;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.cmd.MoneyAddCommand;
 import com.rumaruka.riskofmine.ntw.cmd.MoneySetCommand;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.commands.CommandSourceStack;
@@ -56,8 +55,6 @@ public class RiskOfMine {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
         TimeCoreAPI.setup(this);
-        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ROMConfig.commonConfig);
-        eventBus.register(ROMConfig.class);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         // ROMSounds.REGISTER.register(eventBus);
@@ -112,7 +109,7 @@ public class RiskOfMine {
 
     private void enqueueIMC(InterModEnqueueEvent event) {
         for (SlotTypePreset preset : SlotTypePreset.values()) {
-            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.General.sizeCurio.get()).build());
+            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.GENERAL.sizeCurio.get()).build());
         }
 
 

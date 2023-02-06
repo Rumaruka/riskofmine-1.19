@@ -16,16 +16,16 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @AutoRegistrable.Entries("block")
 public class ROMBlocks {
-    public static SmallChestBlock SMALL_CHEST = promise();
-    public static MultiShopBlock MULTI_SHOP = promise();
+    public static SmallChestBlock SMALL_CHEST  ;
+    public static MultiShopBlock MULTI_SHOP  ;
 
     @AutoRegistrable
     private static final BlockRegister REGISTER = new BlockRegister(MODID);
 
     @AutoRegistrable.Init
     private static void register() {
-        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel();
-        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel();
+        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel().name("small_chest");
+        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().name("multi_shop");
 
 
     }

@@ -1,16 +1,12 @@
-
 buildscript {
     repositories {
         maven {
             url = 'https://repo.spongepowered.org/repository/maven-public/'
             content { includeGroup "org.spongepowered" }
         }
-        maven { url = 'https://maven.parchmentmc.org' }
     }
     dependencies {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath 'org.parchmentmc:librarian:1.+'
-
     }
 }
 
@@ -18,12 +14,12 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'org.jetbrains.kotlin.jvm' version '1.8.0'
 }
 
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply from: 'https://raw.githubusercontent.com/TimeConqueror/Time-Core/1.19/gradle/scripts/timecore.gradle'
 
 version = '1.0'

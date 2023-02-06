@@ -15,7 +15,7 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 @AutoRegistrable.Entries("entity_type")
 public class ROMEntity {
 
-    public static final EntityType<HealthOrbEntity> HEALTH_ORB=promise();
+    public static  EntityType<HealthOrbEntity> HEALTH_ORB ;
 
     @AutoRegistrable
     private static final EntityRegister REGISTER = new EntityRegister(MODID);

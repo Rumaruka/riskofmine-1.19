@@ -45,7 +45,8 @@ public class BlastShowerItem extends EquipmentBase{
                     if (itemStack.getItem() == ROMItems.ALIEN_HEAD) {
                         pPlayer.removeAllEffects();
                         removeNegativeEffect(pPlayer);
-                        pPlayer.getCooldowns().addCooldown(this, ROMConfig.General.cooldownEq.get() - cooldownMinus);
+                        pPlayer.getCooldowns().addCooldown(this, ROMConfig
+                                .GENERAL.cooldownEq.get() - cooldownMinus);
                         MinecraftForge.EVENT_BUS.register(new ProjectileRemoveEvent());
                     }
 
@@ -53,7 +54,7 @@ public class BlastShowerItem extends EquipmentBase{
                 pPlayer.removeAllEffects();
                 removeNegativeEffect(pPlayer);
                 MinecraftForge.EVENT_BUS.register(new ProjectileRemoveEvent());
-                pPlayer.getCooldowns().addCooldown(this, ROMConfig.General.cooldownEq.get());
+                pPlayer.getCooldowns().addCooldown(this, ROMConfig.GENERAL.cooldownEq.get());
 
             }
         }

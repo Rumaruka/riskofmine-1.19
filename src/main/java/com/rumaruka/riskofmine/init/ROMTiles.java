@@ -13,8 +13,8 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @AutoRegistrable.Entries("block_entity_type")
 public class ROMTiles {
-    public static  BlockEntityType<SmallChestTE> SMALL_CHEST = promise();
-    public static  BlockEntityType<MultiShopTE> MULTI_SHOP = promise();
+    public static  BlockEntityType<SmallChestTE> SMALL_CHEST   ;
+    public static  BlockEntityType<MultiShopTE> MULTI_SHOP   ;
 
 
     private static class Init {
