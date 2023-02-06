@@ -28,7 +28,7 @@ import static com.rumaruka.riskofmine.utils.ROMUtils.removeNegativeEffect;
 public class BlastShowerItem extends EquipmentBase{
     public BlastShowerItem( ) {
         super(Category.UTILITY);
-        cooldownMinus= ROMItems.ALIEN_HEAD.cooldownMinus;
+        //cooldownMinus= ROMItems.ALIEN_HEAD.cooldownMinus;
     }
 
     @Override

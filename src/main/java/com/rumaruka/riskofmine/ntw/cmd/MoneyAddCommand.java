@@ -19,7 +19,7 @@ public class MoneyAddCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
         LiteralCommandNode<CommandSourceStack> literalCommandNode = dispatcher.register(Commands.literal("money").requires((p_198442_0_) -> {
             return p_198442_0_.hasPermission(2);
-        }).then(Commands.literal("add").then(Commands.argument("targets", EntityArgument.players()).then(Commands.argument("amount", FloatArgumentType.floatArg()).executes((p_198445_0_) -> {
+        }).then(Commands.literal("add").then(Commands.argument("targets", EntityArgument.players()).then(Commands.argument("amount", IntegerArgumentType.integer()).executes((p_198445_0_) -> {
             return addMoney(p_198445_0_.getSource(), EntityArgument.getPlayers(p_198445_0_, "targets"), IntegerArgumentType.getInteger(p_198445_0_, "amount"));
         })))));
         dispatcher.register(Commands.literal("rom_money").requires((p_198441_0_) -> {

@@ -9,6 +9,7 @@ public class AlienHeadItem extends BaseCollectablesItem {
     public int cooldownMinus;
     public AlienHeadItem() {
         super(Types.LEGENDARY, Category.UTILITY, 64);
-        this.cooldownMinus= ROMUtils.getStack(this).getCount()*100;
+        this.cooldownMinus=getSizeStack()*100;
+
     }
 }

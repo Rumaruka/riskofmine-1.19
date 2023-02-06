@@ -42,10 +42,6 @@ public class ROMUtils {
     }
 
 
-    public static ItemStack getStack(Item item) {
-        return new ItemStack(item);
-    }
-
     public boolean hasCategory(Category categoryEnum) {
         return this.categoryEnum.contains(categoryEnum);
     }
@@ -96,10 +92,6 @@ public class ROMUtils {
         return false;
     }
 
-    public static void replaceItem(ItemStack select, ItemStack replaced) {
-        select.shrink(1);
-        replaced.shrink(-1);
 
-    }
 
 }

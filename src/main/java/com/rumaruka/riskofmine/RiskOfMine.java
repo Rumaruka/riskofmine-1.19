@@ -10,6 +10,7 @@ import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMFeatures;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.cmd.MoneyAddCommand;
 import com.rumaruka.riskofmine.ntw.cmd.MoneySetCommand;
@@ -43,6 +44,7 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
 @Mod(MODID)
+
 public class RiskOfMine {
     private static RiskOfMine instance;
     public static final String MODID = "riskofmine";
@@ -57,7 +59,7 @@ public class RiskOfMine {
         TimeCoreAPI.setup(this);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
-        // ROMSounds.REGISTER.register(eventBus);
+        ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
             eventBus.addListener(this::clientSetup);
@@ -99,13 +101,7 @@ public class RiskOfMine {
 
 
     }
-    @SubscribeEvent
-    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
-        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        MoneyAddCommand.register(dispatcher);
-        MoneySetCommand.register(dispatcher);
 
-    }
 
     private void enqueueIMC(InterModEnqueueEvent event) {
         for (SlotTypePreset preset : SlotTypePreset.values()) {
@@ -114,17 +110,6 @@ public class RiskOfMine {
 
 
     }
-
-    @SubscribeEvent
-    public static void renderItemHud(RenderPlayerEvent event) {
-        PlayerRenderer playerRenderer = event.getRenderer();
-
-       playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
-
-
-
-    }
-
     public static RiskOfMine instance() {
         return instance;
     }
@@ -136,4 +121,27 @@ public class RiskOfMine {
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
+
+
+    @Mod.EventBusSubscriber
+    public static class ModEvent{
+        @SubscribeEvent
+        public static void renderItemHud(RenderPlayerEvent event) {
+            PlayerRenderer playerRenderer = event.getRenderer();
+
+            playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+
+
+
+        }
+        @SubscribeEvent
+        public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+            CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+            MoneyAddCommand.register(dispatcher);
+            MoneySetCommand.register(dispatcher);
+
+        }
+    }
+
+
 }
