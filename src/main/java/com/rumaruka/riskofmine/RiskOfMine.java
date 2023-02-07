@@ -8,6 +8,7 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
+import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMFeatures;
 import com.rumaruka.riskofmine.init.ROMSounds;
@@ -78,7 +79,7 @@ public class RiskOfMine {
 
 
     private void setup(final FMLCommonSetupEvent event) {
-//        MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
+        MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
         if (MOD_LIST.isLoaded("jeresources")) {
             // ROMJerPlugin.setup(event);
         }
@@ -121,27 +122,23 @@ public class RiskOfMine {
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
+    @SubscribeEvent
+    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
+        MoneyAddCommand.register(dispatcher);
+        MoneySetCommand.register(dispatcher);
 
-
-    @Mod.EventBusSubscriber
-    public static class ModEvent{
-        @SubscribeEvent
-        public static void renderItemHud(RenderPlayerEvent event) {
-            PlayerRenderer playerRenderer = event.getRenderer();
-
-            playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
-
-
-
-        }
-        @SubscribeEvent
-        public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
-            CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-            MoneyAddCommand.register(dispatcher);
-            MoneySetCommand.register(dispatcher);
-
-        }
     }
+    @SubscribeEvent
+    public static void renderItemHud(RenderPlayerEvent.Post event) {
+        PlayerRenderer playerRenderer = event.getRenderer();
+
+        playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
+
+
+
+    }
+
 
 
 }

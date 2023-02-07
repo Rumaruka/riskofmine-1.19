@@ -24,8 +24,8 @@ public class ROMBlocks {
 
     @AutoRegistrable.Init
     private static void register() {
-        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel();
-        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel();
+        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(()->ModSetup.MAIN);
+        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(()->ModSetup.MAIN);
 
 
     }
