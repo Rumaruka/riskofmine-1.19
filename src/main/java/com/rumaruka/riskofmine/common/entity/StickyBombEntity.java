@@ -25,7 +25,7 @@ public class StickyBombEntity extends Entity {
         this.blocksBuilding = true;
     }
 
-    public StickyBombEntity(Level pLevel, double pX, double pY, double pZ, @Nullable LivingEntity pOwner) {
+    public StickyBombEntity(Level pLevel, double pX, double pY, double pZ, @Nullable LivingEntity pOwner,LivingEntity target) {
         this(ROMEntity.STICKY_BOMB, pLevel);
         this.setPos(pX, pY, pZ);
         double d0 = pLevel.random.nextDouble() * (double)((float)Math.PI * 2F);
@@ -35,6 +35,7 @@ public class StickyBombEntity extends Entity {
         this.yo = pY;
         this.zo = pZ;
         this.owner = pOwner;
+        this.target=target;
     }
 
     protected void defineSynchedData() {
