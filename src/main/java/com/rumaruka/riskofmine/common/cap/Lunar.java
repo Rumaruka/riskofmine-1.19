@@ -62,7 +62,7 @@ public class Lunar extends CoffeeCapabilityInstance<Entity> {
         setLunar(Math.min(getCurrentLunar() - value, getMaxLunar(player)));
     }
 
-    public boolean hasMoney(int price) {
+    public boolean hasLunar(int price) {
         return getCurrentLunar() >= price;
     }
     public int getCurrentLunar() {

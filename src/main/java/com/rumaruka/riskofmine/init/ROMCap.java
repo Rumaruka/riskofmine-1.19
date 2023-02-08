@@ -7,7 +7,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import ru.timeconqueror.timecore.TimeCore;
+import ru.timeconqueror.timecore.api.CapabilityManagerAPI;
 import ru.timeconqueror.timecore.api.registry.CapabilityRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 import ru.timeconqueror.timecore.common.capability.owner.CapabilityOwner;
@@ -27,8 +27,8 @@ public class ROMCap {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() ->
-                TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY, MONEY, entity -> entity instanceof Player, entity -> new Money(((Player) entity))));
-        TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
+                CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, MONEY, entity -> entity instanceof Player, entity -> new Money(((Player) entity))));
+        CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
             Money cap = Money.of(entity);
             if (cap != null) {
                 cap.sendAllData();
@@ -37,13 +37,14 @@ public class ROMCap {
 
 
         event.enqueueWork(() ->
-                TimeCore.INSTANCE.getCapabilityManager().attachStaticCoffeeCapability(CapabilityOwner.ENTITY, LUNAR, entity -> entity instanceof Player, entity -> new Lunar(((Player) entity))));
-        TimeCore.INSTANCE.getCapabilityManager().enableSyncingPlayerCapabilityOnJoin(entity -> {
+                CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, LUNAR, entity -> entity instanceof Player, entity -> new Lunar(((Player) entity))));
+        CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
             Lunar cap = Lunar.of(entity);
             if (cap != null) {
                 cap.sendAllData();
             }
         });
+
     }
 
 }

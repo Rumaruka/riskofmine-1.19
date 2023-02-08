@@ -44,6 +44,18 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
             channel.send(PacketDistributor.PLAYER.with(() -> serverPlayer), data);
         }
     }
+    public boolean consumeMoney(Player player, int price) {
+        if (!player.isCreative()) {
+            if (hasMoney(price)) {
+                setMoney(getCurrentMoney() - price);
+
+                return true;
+            }
+
+            return false;
+        }
+        return true;
+    }
     public void setMoney(int value) {
         if (getCurrentMoney() != value) {
             money.set(value);
