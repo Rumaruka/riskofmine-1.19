@@ -1,7 +1,6 @@
 package com.rumaruka.riskofmine;
 
 
-import com.mojang.brigadier.CommandDispatcher;
 import com.rumaruka.riskofmine.client.ROMEntityRegister;
 import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
@@ -11,25 +10,21 @@ import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMFeatures;
+import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
-import com.rumaruka.riskofmine.ntw.cmd.MoneyAddCommand;
-import com.rumaruka.riskofmine.ntw.cmd.MoneySetCommand;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -70,7 +65,7 @@ public class RiskOfMine {
         logger.info("Network Risk Of Mine setuping");
         ROMNetwork.setup();
 
-//        ROMParticles.PARTICLES.register(eventBus);
+        ROMParticles.PARTICLES.register(eventBus);
 //        ROMEffects.EFFECTS.register(eventBus);
 //        ROMEffects.POTIONS.register(eventBus);
         ROMFeatures.registerFeatures();
@@ -88,7 +83,6 @@ public class RiskOfMine {
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {
 
-//
         MenuScreens.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
 //        MenuScreens.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
@@ -111,6 +105,7 @@ public class RiskOfMine {
 
 
     }
+
     public static RiskOfMine instance() {
         return instance;
     }
@@ -122,13 +117,7 @@ public class RiskOfMine {
     public static TextureLocation tl(String path) {
         return new TextureLocation(RiskOfMine.MODID, path);
     }
-    @SubscribeEvent
-    public static void onRegisterCommandEvent(RegisterCommandsEvent event) {
-        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        MoneyAddCommand.register(dispatcher);
-        MoneySetCommand.register(dispatcher);
 
-    }
     @SubscribeEvent
     public static void renderItemHud(RenderPlayerEvent.Post event) {
         PlayerRenderer playerRenderer = event.getRenderer();
@@ -136,9 +125,7 @@ public class RiskOfMine {
         playerRenderer.addLayer(new LayerMonsterTooth(playerRenderer));
 
 
-
     }
-
 
 
 }
