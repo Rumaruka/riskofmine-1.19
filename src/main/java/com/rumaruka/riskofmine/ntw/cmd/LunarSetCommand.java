@@ -32,12 +32,13 @@ public class LunarSetCommand {
 
                 lunar.setLunar(amount);
                 lunar.detectAndSendChanges();
+
             }
 
 
         }
         if (playerEntities.size() == 1) {
-            source.sendSuccess(Component.translatable("commands.add." + "lunar"+ ".success.single", amount, playerEntities.iterator().next().getDisplayName()), true);
+            source.sendSuccess(Component.translatable("commands.set." + "lunar"+ ".success.single", amount, playerEntities.iterator().next().getDisplayName()), true);
 
         }
         return playerEntities.size();

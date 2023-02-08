@@ -31,6 +31,7 @@ public class LunarAddCommand {
             Lunar lunar = Lunar.of(player);
             if (lunar!=null){
 
+
                 lunar.addLunar(amount);
                 lunar.detectAndSendChanges();
             }
