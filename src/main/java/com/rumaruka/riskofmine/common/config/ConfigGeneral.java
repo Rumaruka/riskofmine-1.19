@@ -13,6 +13,7 @@ public class ConfigGeneral extends Config {
 
     public IQuickConfigValue<Integer> sizeCurio;
     public IQuickConfigValue<Integer> cooldownEq;
+    public IQuickConfigValue<Integer> priceSmallChest;
     public ConfigGeneral(@NotNull Type type, @NotNull String key, @Nullable String comment) {
         super(type, key, comment);
     }
@@ -30,7 +31,11 @@ public class ConfigGeneral extends Config {
 
         );
 
+        priceSmallChest = builder.optimized(
+                builder.comment("Payment for Open Small Chest")
+                        .defineInRange("Payment Small Chest: ",10,10,Integer.MAX_VALUE)
 
+        );
 
     }
 }

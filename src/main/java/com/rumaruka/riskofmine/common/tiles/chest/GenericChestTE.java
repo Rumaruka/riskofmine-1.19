@@ -4,6 +4,7 @@ import com.rumaruka.riskofmine.api.Chest;
 import com.rumaruka.riskofmine.api.Types;
 import com.rumaruka.riskofmine.common.blocks.chest.GenericChestBlock;
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -37,11 +38,11 @@ public abstract class GenericChestTE extends RandomizableContainerBlockEntity im
 
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         protected void onOpen(Level level, BlockPos pos, BlockState blockState) {
-            GenericChestTE.playSound(level, pos, blockState, SoundEvents.CHEST_OPEN);
+            GenericChestTE.playSound(level, pos, blockState, ROMSounds.ROM_CHEST_OPEN.get());
         }
 
         protected void onClose(Level level, BlockPos pos, BlockState blockState) {
-            GenericChestTE.playSound(level, pos, blockState, SoundEvents.CHEST_CLOSE);
+            GenericChestTE.playSound(level, pos, blockState, ROMSounds.ROM_CHEST_OPEN.get());
         }
 
         protected void openerCountChanged(Level level, BlockPos pos, BlockState blockState, int previousCount, int newCount) {
