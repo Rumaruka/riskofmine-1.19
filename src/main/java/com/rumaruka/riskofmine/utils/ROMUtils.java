@@ -2,25 +2,17 @@ package com.rumaruka.riskofmine.utils;
 
 import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.api.Category;
-import com.rumaruka.riskofmine.api.Types;
-import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.client.Minecraft;
-
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.commands.EffectCommands;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class ROMUtils {
@@ -32,12 +24,12 @@ public class ROMUtils {
     public static int durOld;
 
 
-    public static Minecraft getMc(){
+    public static Minecraft getMc() {
         return mc;
     }
 
 
-    public static Player getPlayer(){
+    public static Player getPlayer() {
         return mc.player;
     }
 
@@ -92,6 +84,9 @@ public class ROMUtils {
         return false;
     }
 
-
+    public static void replaceItem(ItemStack used, ItemStack scrap) {
+        used.shrink(1);
+        scrap.shrink(-1);
+    }
 
 }

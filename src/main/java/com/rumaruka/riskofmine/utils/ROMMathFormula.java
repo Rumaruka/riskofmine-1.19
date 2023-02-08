@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Player;
 
 public class ROMMathFormula {
 
-    private final Player player = Minecraft.getInstance().player;
 
     public static float powerIncreasing(float x, float y) {
 
