@@ -16,13 +16,13 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID)
 public class LunarEvents {
     @SubscribeEvent
-    public void onEntityDeath(LivingDeathEvent event) {
+    public static void onEntityDeath(LivingDeathEvent event) {
 
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
             LivingEntity livingEntity = event.getEntity();
             Level level = livingEntity.level;
 
-            Lunar lunar = Lunar.of(player);
+
             if (!level.isClientSide) {
                 if (livingEntity.tickCount % 10 == 0) {
                     ItemEntity itemEntity = new ItemEntity(level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(ROMItems.LUNAR_COIN));
@@ -43,7 +43,7 @@ public class LunarEvents {
                     return;
                 } else {
                     if (lunar != null) {
-                        lunar.lunar.set(0);
+                        lunar.setLunar(0);
                         lunar.detectAndSendChanges();
                     }
 

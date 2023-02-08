@@ -45,17 +45,31 @@ public class Lunar extends CoffeeCapabilityInstance<Entity> {
         }
     }
 
+    public void setLunar(int value) {
+        if (getCurrentLunar() != value) {
+            lunar.set(value);
+        }
+    }
+    public static int getMaxLunar(Player player) {
+        return Integer.MAX_VALUE;
+    }
     public void addLunar(int value) {
-        lunar.set(lunar.get() + value);
-    }
 
+        setLunar(Math.min(getCurrentLunar() + value, getMaxLunar(player)));
+    }
     public void removeLunar(int value) {
-        lunar.set(lunar.get() - value);
+
+        setLunar(Math.min(getCurrentLunar() - value, getMaxLunar(player)));
     }
 
+    public boolean hasMoney(int price) {
+        return getCurrentLunar() >= price;
+    }
     public int getCurrentLunar() {
         return lunar.get();
     }
+
+
 
     public void detectAndSendChanges() {
         detectAndSendChanges(player.level, player);
