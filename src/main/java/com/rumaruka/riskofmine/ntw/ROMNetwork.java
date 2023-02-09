@@ -1,5 +1,6 @@
 package com.rumaruka.riskofmine.ntw;
 import com.rumaruka.riskofmine.ntw.helper.ISimplePacket;
+import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -63,6 +64,11 @@ public class ROMNetwork {
         instance = new ROMNetwork();
         instance.registerPacket(InventoryTopStacksSyncPacket.class, InventoryTopStacksSyncPacket::new, NetworkDirection.PLAY_TO_CLIENT);
         network.registerMessage(nextID(), OverlayPacket.class,OverlayPacket::toBytes,OverlayPacket::new,OverlayPacket::handle);
+        network.messageBuilder(ItemActivationPacket.class, nextID())
+                .encoder(ItemActivationPacket::toBytes)
+                .decoder(ItemActivationPacket::new)
+                .consumerMainThread(ItemActivationPacket::handle)
+                .add();
     }
 
     /**
@@ -88,7 +94,7 @@ public class ROMNetwork {
      * @param <MSG>     Packet class type
      */
     public <MSG> void registerPacket(Class<MSG> clazz, BiConsumer<MSG, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, MSG> decoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer, @Nullable NetworkDirection direction) {
-        this.network.registerMessage(this.id++, clazz, encoder, decoder, consumer, Optional.ofNullable(direction));
+        network.registerMessage(id++, clazz, encoder, decoder, consumer, Optional.ofNullable(direction));
     }
 
     /* Sending packets */
@@ -99,7 +105,7 @@ public class ROMNetwork {
      * @param msg Packet to send
      */
     public void sendToServer(Object msg) {
-        this.network.sendToServer(msg);
+        network.sendToServer(msg);
     }
 
     /**
@@ -119,7 +125,7 @@ public class ROMNetwork {
      * @param packet Packet
      */
     public void sendVanillaPacket(Packet<?> packet, Entity player) {
-        if (player instanceof ServerPlayer && ((ServerPlayer) player).connection != null) {
+        if (player instanceof ServerPlayer) {
             ((ServerPlayer) player).connection.send(packet);
         }
     }
@@ -167,7 +173,7 @@ public class ROMNetwork {
      * @param entity Entity to check
      */
     public void sendToTrackingAndSelf(Object msg, Entity entity) {
-        this.network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), msg);
+        network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), msg);
     }
 
     /**
@@ -177,7 +183,7 @@ public class ROMNetwork {
      * @param entity Entity to check
      */
     public void sendToTracking(Object msg, Entity entity) {
-        this.network.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), msg);
+        network.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), msg);
     }
 
     /**

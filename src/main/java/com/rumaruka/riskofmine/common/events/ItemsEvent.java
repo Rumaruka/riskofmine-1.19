@@ -1,13 +1,19 @@
 package com.rumaruka.riskofmine.common.events;
 
+import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
+import com.rumaruka.riskofmine.init.ROMSounds;
+import com.rumaruka.riskofmine.ntw.ROMNetwork;
+import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EffectInstance;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -20,6 +26,7 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -134,7 +141,91 @@ public class ItemsEvent {
 
         }
     }
+    @SubscribeEvent
+    public static void onEntityDeath(LivingDeathEvent event) {
+        /**
+         Player kill Entity
+         */
+        if (event.getSource().getEntity() instanceof ServerPlayer player) {
+            LivingEntity livingEntity = event.getEntity();
+            Level world = livingEntity.level;
 
+            if (!world.isClientSide) {
+
+                if (CuriosApi.getCuriosHelper().findFirstCurio( player,ROMItems.MONSTER_TOOTH).isPresent()) {
+                    ItemStack curiosStack = CuriosApi.getCuriosHelper().findFirstCurio( player,ROMItems.MONSTER_TOOTH).get().stack();
+                    world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount()));
+                    world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
+                }
+
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    ItemStack itemStack = player.getInventory().getItem(i);
+                    if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
+                        world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount()));
+                        world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
+
+                    }
+                }
+
+            }
+        }
+        /**
+         Entity kill Player
+         */
+        if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
+            Level world = player.level;
+            if (!world.isClientSide) {
+                if (event.getSource().isBypassInvul()) {
+                    return;
+                } else {
+                    for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                        ItemStack itemStack = player.getInventory().getItem(i);
+                        if (itemStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
+                            if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
+                                player.setHealth(player.getMaxHealth());
+                                player.removeAllEffects();
+                                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1800, 2));
+                                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, 2));
+                                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1600, 1));
+                                player.addEffect(new MobEffectInstance(MobEffects.JUMP, 600, 1));
+                                player.level.broadcastEntityEvent(player, (byte) 35);
+                                ROMNetwork.getInstance().sendTo(new ItemActivationPacket(itemStack),player);
+
+
+                                itemStack.shrink(1);
+
+
+                            }
+                        }
+
+
+                    }
+                    if (CuriosApi.getCuriosHelper().findFirstCurio( player,ROMItems.DIO_BEST_FRIEND).isPresent()) {
+                        ItemStack curiosStack = CuriosApi.getCuriosHelper().findFirstCurio( player,ROMItems.DIO_BEST_FRIEND).get().stack();
+                        if (curiosStack.getItem() == ROMItems.DIO_BEST_FRIEND) {
+                            if (player.isDeadOrDying() || player.getHealth() < 2.5f) {
+
+                                player.setHealth(player.getMaxHealth());
+                                player.removeAllEffects();
+                                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1800, 2));
+                                player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, 2));
+                                player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1600, 1));
+                                player.addEffect(new MobEffectInstance(MobEffects.JUMP, 600, 1));
+                                player.level.broadcastEntityEvent(player, (byte) 35);
+                                ROMNetwork.getInstance().sendTo(new ItemActivationPacket(curiosStack),player);
+                                curiosStack.shrink(1);
+                            }
+
+                        }
+                    }
+
+
+                }
+
+
+            }
+        }
+    }
     @SubscribeEvent
     public static void onEntityUpdate(LivingEvent.LivingTickEvent event) {
         Player player = ROMUtils.getPlayer();

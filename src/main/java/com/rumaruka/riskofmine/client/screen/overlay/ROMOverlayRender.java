@@ -6,6 +6,7 @@ import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
+import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -24,9 +25,9 @@ import java.awt.*;
 @Mod.EventBusSubscriber(modid = RiskOfMine.MODID)
 public class ROMOverlayRender {
 
-    public static KeyMapping KEY_SHOW_OVERLAYS = new KeyMapping("Show Overlay", GLFW.GLFW_KEY_M, "Risk of Mine");
+    public static KeyMapping KEY_SHOW_OVERLAYS = new KeyMapping("key.mapping.show_overlay.name", GLFW.GLFW_KEY_M, "key.mapping.category.name");
 
-    private static final Minecraft mc = Minecraft.getInstance();
+    private static final Minecraft mc = ROMUtils.getMc();
 
     @SubscribeEvent
     public static void registerKeys(RegisterKeyMappingsEvent e) {

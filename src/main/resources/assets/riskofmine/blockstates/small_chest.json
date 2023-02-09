@@ -1,5 +1,4 @@
 {
-  "variants": {
-    "": { "model": "riskofmine:block/small_chest" }
-  }
+  "parent": "block/block"
+
 }

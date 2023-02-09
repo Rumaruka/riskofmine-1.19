@@ -8,10 +8,7 @@ import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.events.GenerationEventHandler;
-import com.rumaruka.riskofmine.init.ROMContainerTypes;
-import com.rumaruka.riskofmine.init.ROMFeatures;
-import com.rumaruka.riskofmine.init.ROMParticles;
-import com.rumaruka.riskofmine.init.ROMSounds;
+import com.rumaruka.riskofmine.init.*;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -51,10 +48,10 @@ public class RiskOfMine {
     public RiskOfMine() {
         instance = this;
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        MinecraftForge.EVENT_BUS.register(this);
         TimeCoreAPI.setup(this);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
+        MinecraftForge.EVENT_BUS.register(this);
         ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
@@ -66,8 +63,8 @@ public class RiskOfMine {
         ROMNetwork.setup();
 
         ROMParticles.PARTICLES.register(eventBus);
-//        ROMEffects.EFFECTS.register(eventBus);
-//        ROMEffects.POTIONS.register(eventBus);
+        ROMEffects.EFFECTS.register(eventBus);
+        ROMEffects.POTIONS.register(eventBus);
         ROMFeatures.registerFeatures();
 
     }
