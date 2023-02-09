@@ -50,7 +50,7 @@ public abstract class GenericShopBlock extends BaseEntityBlock implements Simple
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
+    public static final BooleanProperty CLOSED = BooleanProperty.create("closed");
     protected static final VoxelShape AABB = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
 
     private static final DoubleBlockCombiner.Combiner<GenericShopTE, Optional<Container>> CHEST_COMBINER = new DoubleBlockCombiner.Combiner<>() {
@@ -286,7 +286,7 @@ public abstract class GenericShopBlock extends BaseEntityBlock implements Simple
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockBlockStateBuilder) {
-        blockBlockStateBuilder.add(FACING, WATERLOGGED);
+        blockBlockStateBuilder.add(FACING, WATERLOGGED,CLOSED);
     }
 
     @Override
