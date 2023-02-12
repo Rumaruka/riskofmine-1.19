@@ -89,4 +89,9 @@ public class ROMUtils {
         scrap.shrink(-1);
     }
 
+
+    public static int getCountInItem(Item item){
+        return new ItemStack(item).getCount();
+    }
+
 }

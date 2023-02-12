@@ -17,12 +17,12 @@ public class ROMContainerTypes {
     private static final SimpleVanillaRegister<MenuType<?>> REGISTER = new SimpleVanillaRegister<>(ForgeRegistries.MENU_TYPES, MODID);
 
     public static  MenuType<ChestInventory> SMALL_CHEST = promise()  ;
-//    public static  MenuType<ChestInventory> LARGE_CHEST   ;
-//    public static  MenuType<ChestInventory> LEGENDARY_CHEST   ;
-//    public static  MenuType<ChestInventory>LUNAR_CHEST   ;
+//    public static  MenuType<ChestInventory> LARGE_CHEST  = promise()  ;
+//    public static  MenuType<ChestInventory> LEGENDARY_CHEST   = promise() ;
+//    public static  MenuType<ChestInventory>LUNAR_CHEST  = promise()  ;
 
     public static  MenuType<ChestShopInventory>MULTI_SHOP  = promise() ;
-//    public static final MenuType<ChestShopInventory>EQUIPMENT_TRIPLE_BARREL   ;
+//    public static final MenuType<ChestShopInventory>EQUIPMENT_TRIPLE_BARREL  = promise()  ;
 
     @AutoRegistrable.Init
     private static void register() {
