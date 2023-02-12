@@ -2,6 +2,9 @@ package com.rumaruka.riskofmine.common.entity;
 
 import com.rumaruka.riskofmine.events.PlayerHealthEvent;
 import com.rumaruka.riskofmine.init.ROMEntity;
+import com.rumaruka.riskofmine.init.ROMItems;
+import com.rumaruka.riskofmine.init.ROMSounds;
+import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -29,7 +32,7 @@ public class HealthOrbEntity extends Entity {
     private static final int ORB_GROUPS_PER_AREA = 40;
     private static final double ORB_MERGE_DISTANCE = 0.5D;
     private int age;
-    private int health = 5;
+    private int health = 1;
     public int value;
     private int count = 1;
     private Player followingPlayer;
@@ -222,8 +225,8 @@ public class HealthOrbEntity extends Entity {
                 pEntity.takeXpDelay = 2;
                 pEntity.take(this, 1);
 
-                pEntity.heal(this.value);
-
+                pEntity.heal(ROMItems.MONSTER_TOOTH.getSizeStack());
+                pEntity.level.playSound(null, new BlockPos(pEntity.getX(),pEntity.getY(),pEntity.getZ()), ROMSounds.PROC_MT_IMPACT.get(), SoundSource.MASTER,2,2);
 
                 --this.count;
                 if (this.count == 0) {

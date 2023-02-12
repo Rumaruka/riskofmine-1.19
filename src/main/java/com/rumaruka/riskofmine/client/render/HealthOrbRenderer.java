@@ -21,37 +21,40 @@ public class HealthOrbRenderer extends EntityRenderer<HealthOrbEntity> {
     private static final RenderType RENDER_TYPE = RenderType.entityTranslucentCull(HEAL_ORB_TEXTURES);
     public HealthOrbRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
+        this.shadowRadius = 0.15F;
+        this.shadowStrength = 0.75F;
+
     }
 
     @Override
     public void render(HealthOrbEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
         pMatrixStack.pushPose();
         int i = pEntity.getIcon();
-        float f = (float)(i % 4 * 16 + 0) / 64.0F;
-        float f1 = (float)(i % 4 * 16 + 16) / 64.0F;
-        float f2 = (float)(i / 4 * 16 + 0) / 64.0F;
-        float f3 = (float)(i / 4 * 16 + 16) / 64.0F;
+        float f = (float) (i % 3 * 16) / 64.0F;
+        float f1 = (float) (i % 3 * 16 + 16) / 64.0F;
+        float f2 = (float) (i / 3 * 16) / 64.0F;
+        float f3 = (float) (i / 3 * 16 + 16) / 64.0F;
         float f4 = 1.0F;
         float f5 = 0.5F;
         float f6 = 0.25F;
         float f7 = 255.0F;
-        float f8 = ((float)pEntity.tickCount + pPartialTicks) / 2.0F;
-        int j = (int)((Mth.sin(f8 + 0.0F) + 1.0F) * 0.5F * 255.0F);
+        float f8 = ((float) pEntity.tickCount + pPartialTicks) / 2.0F;
+        int j = (int) ((Mth.sin(f8 + 0.0F) + 1.0F) * 0.5F * 255.0F);
         int k = 255;
-        int l = (int)((Mth.sin(f8 + 4.1887903F) + 1.0F) * 0.1F * 255.0F);
-        pMatrixStack.translate(0.0F, 0.1F, 0.0F);
+        int l = (int) ((Mth.sin(f8 + 4.1887903F) + 1.0F) * 0.1F * 255.0F);
+        pMatrixStack.translate(0.0D, 0.1F, 0.0D);
         pMatrixStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         pMatrixStack.mulPose(Axis.YP.rotationDegrees(180.0F));
         float f9 = 0.3F;
         pMatrixStack.scale(0.3F, 0.3F, 0.3F);
-        VertexConsumer vertexconsumer = pBuffer.getBuffer(RENDER_TYPE);
-        PoseStack.Pose posestack$pose = pMatrixStack.last();
-        Matrix4f matrix4f = posestack$pose.pose();
-        Matrix3f matrix3f = posestack$pose.normal();
-        vertex(vertexconsumer, matrix4f, matrix3f, -0.5F, -0.25F, j, 255, l, f, f3, pPackedLight);
-        vertex(vertexconsumer, matrix4f, matrix3f, 0.5F, -0.25F, j, 255, l, f1, f3, pPackedLight);
-        vertex(vertexconsumer, matrix4f, matrix3f, 0.5F, 0.75F, j, 255, l, f1, f2, pPackedLight);
-        vertex(vertexconsumer, matrix4f, matrix3f, -0.5F, 0.75F, j, 255, l, f, f2, pPackedLight);
+        VertexConsumer  ivertexbuilder = pBuffer.getBuffer(RENDER_TYPE);
+        PoseStack.Pose  matrixstack$entry = pMatrixStack.last();
+        Matrix4f matrix4f = matrixstack$entry.pose();
+        Matrix3f matrix3f = matrixstack$entry.normal();
+        vertex(ivertexbuilder, matrix4f, matrix3f, -0.5F, -0.25F, 255, j, l, f, f3, pPackedLight);
+        vertex(ivertexbuilder, matrix4f, matrix3f, 0.5F, -0.25F, 255, j, l, f1, f3, pPackedLight);
+        vertex(ivertexbuilder, matrix4f, matrix3f, 0.5F, 0.75F, 255, j, l, f1, f2, pPackedLight);
+        vertex(ivertexbuilder, matrix4f, matrix3f, -0.5F, 0.75F, 255, j, l, f, f2, pPackedLight);
         pMatrixStack.popPose();
         super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
     }
