@@ -10,19 +10,43 @@
       "required": false
     },
     {
-      "id": "cyclic:charm_luck",
+      "id": "riskofmine:monster_tooth",
       "required": false
     },
     {
-      "id": "cyclic:charm_xp_speed",
+      "id": "riskofmine:gasoline",
       "required": false
     },
     {
-      "id": "cyclic:charm_xp_blocker",
+      "id":     "riskofmine:crowbar",
       "required": false
     },
     {
-      "id": "cyclic:antigravity",
+      "id":  "riskofmine:energy_drink",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:chronobauble",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:stun_grenade",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:old_war_stealthkit",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:sticky_bomb",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:focus_crystal",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:shaped_glass",
       "required": false
     }
   ]

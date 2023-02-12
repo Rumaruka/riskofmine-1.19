@@ -1,20 +1,21 @@
 package com.rumaruka.riskofmine.common.entity;
 
 import com.rumaruka.riskofmine.init.ROMEntity;
+import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.PrimedTnt;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
 public class StickyBombEntity extends Entity {
-    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(PrimedTnt.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_FUSE_ID = SynchedEntityData.defineId(StickyBombEntity.class, EntityDataSerializers.INT);
     private static final int DEFAULT_FUSE_TIME = 80;
     @Nullable
     private LivingEntity owner;
@@ -91,8 +92,7 @@ public class StickyBombEntity extends Entity {
 
     }
     protected void explode() {
-        float f = 4.0F;
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4.0F, Level.ExplosionInteraction.TNT);
+        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.0F, Level.ExplosionInteraction.TNT);
     }
 
     protected void addAdditionalSaveData(CompoundTag pCompound) {

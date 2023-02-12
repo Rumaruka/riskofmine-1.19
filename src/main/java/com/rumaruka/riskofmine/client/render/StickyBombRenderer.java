@@ -36,6 +36,6 @@ public class StickyBombRenderer extends EntityRenderer<StickyBombEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(StickyBombEntity pEntity) {
-        return rl("textures/items/sticky_bomb_model.png");
+        return rl("textures/item/sticky_bomb_model.png");
     }
 }

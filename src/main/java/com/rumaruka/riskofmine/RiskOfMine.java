@@ -103,9 +103,6 @@ public class RiskOfMine {
 
     }
 
-    public static RiskOfMine instance() {
-        return instance;
-    }
 
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(MODID, path);
