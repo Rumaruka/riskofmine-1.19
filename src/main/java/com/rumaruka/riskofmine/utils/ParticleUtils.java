@@ -15,6 +15,6 @@ public class ParticleUtils {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerParticle(RegisterParticleProvidersEvent event) {
         event.register(ROMParticles.FOCUS_CRYSTAL.get(), FocusCrystalFX.Factory::new);
-       // Minecraft.getInstance().particleEngine.register(ROMParticles.STUN_PARTICLES.get(), StunFX.Factory::new);
+       //   event.register(ROMParticles.STUN_PARTICLES.get(), StunFX.Factory::new);
     }
 }

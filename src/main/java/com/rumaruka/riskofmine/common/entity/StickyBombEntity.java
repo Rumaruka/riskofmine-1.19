@@ -1,6 +1,8 @@
 package com.rumaruka.riskofmine.common.entity;
 
 import com.rumaruka.riskofmine.init.ROMEntity;
+import com.rumaruka.riskofmine.init.ROMItems;
+import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -92,7 +94,7 @@ public class StickyBombEntity extends Entity {
 
     }
     protected void explode() {
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 1.0F, Level.ExplosionInteraction.TNT);
+        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), ROMMathFormula.explodeIncreasing(ROMItems.STICKY_BOMB.getSizeStack()), Level.ExplosionInteraction.TNT);
     }
 
     protected void addAdditionalSaveData(CompoundTag pCompound) {

@@ -7,7 +7,7 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.events.GenerationEventHandler;
+import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.init.*;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -65,15 +65,14 @@ public class RiskOfMine {
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
         ROMEffects.POTIONS.register(eventBus);
-        ROMFeatures.registerFeatures();
 
     }
 
 
     private void setup(final FMLCommonSetupEvent event) {
-        MinecraftForge.EVENT_BUS.register(new GenerationEventHandler());
+
         if (MOD_LIST.isLoaded("jeresources")) {
-            // ROMJerPlugin.setup(event);
+             ROMJerPlugin.setup(event);
         }
     }
 

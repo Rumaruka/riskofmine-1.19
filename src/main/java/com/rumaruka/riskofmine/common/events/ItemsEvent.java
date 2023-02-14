@@ -188,7 +188,7 @@ public class ItemsEvent {
                                 player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 200, 2));
                                 player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1600, 1));
                                 player.addEffect(new MobEffectInstance(MobEffects.JUMP, 600, 1));
-                                player.level.broadcastEntityEvent(player, (byte) 35);
+                                world.broadcastEntityEvent(player, (byte) 35);
                                 ROMNetwork.getInstance().sendTo(new ItemActivationPacket(itemStack),player);
 
 

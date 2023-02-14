@@ -176,23 +176,11 @@ public class ROMNetwork {
         network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity), msg);
     }
 
-    /**
-     * Sends a packet to all entities tracking the given entity
-     *
-     * @param msg    Packet
-     * @param entity Entity to check
-     */
+
     public void sendToTracking(Object msg, Entity entity) {
         network.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), msg);
     }
 
-    /**
-     * Same as {@link #sendToClientsAround(Object, ServerLevel, BlockPos)}, but checks that the world is a level accessor
-     *
-     * @param msg      Packet to send
-     * @param world    World instance
-     * @param position Target position
-     */
     public void sendToClientsAround(Object msg, @Nullable LevelAccessor world, BlockPos position) {
         if (world instanceof ServerLevel) {
             sendToClientsAround(msg, (ServerLevel) world, position);
