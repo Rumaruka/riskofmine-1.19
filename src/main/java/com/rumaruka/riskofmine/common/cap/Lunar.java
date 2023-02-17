@@ -44,7 +44,18 @@ public class Lunar extends CoffeeCapabilityInstance<Entity> {
             channel.send(PacketDistributor.PLAYER.with(() -> serverPlayer), data);
         }
     }
+    public boolean consumeLunar(Player player, int price) {
+        if (!player.isCreative()) {
+            if (hasLunar(price)) {
+                setLunar(getCurrentLunar() - price);
 
+                return true;
+            }
+
+            return false;
+        }
+        return true;
+    }
     public void setLunar(int value) {
         if (getCurrentLunar() != value) {
             lunar.set(value);

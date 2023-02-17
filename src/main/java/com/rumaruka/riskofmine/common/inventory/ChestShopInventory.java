@@ -28,15 +28,15 @@ public class ChestShopInventory extends AbstractContainerMenu {
     }
 
 
-//    public static @NotNull ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, Inventory playerInventory) {
-//        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, new SimpleContainer(Chest.EQUIPMENT_TRIPLE_BARREL.size), Chest.EQUIPMENT_TRIPLE_BARREL);
-//    }
-//
-//    public static ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, Inventory playerInventory, Container inventory) {
-//        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, inventory, Chest.EQUIPMENT_TRIPLE_BARREL);
-//    }
-//
-//
+    public static @NotNull ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, Inventory playerInventory) {
+        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, new SimpleContainer(Chest.EQUIPMENT_TRIPLE_BARREL.size), Chest.EQUIPMENT_TRIPLE_BARREL);
+    }
+
+    public static ChestShopInventory createEquipmentTripleBarrelContainer(int windowId, Inventory playerInventory, Container inventory) {
+        return new ChestShopInventory(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, windowId, playerInventory, inventory, Chest.EQUIPMENT_TRIPLE_BARREL);
+    }
+
+
     public static @NotNull ChestShopInventory createMultiShopContainer(int windowId, Inventory playerInventory) {
         return new ChestShopInventory(ROMContainerTypes.MULTI_SHOP, windowId, playerInventory, new SimpleContainer(Chest.MULTI_SHOP.size), Chest.MULTI_SHOP);
     }

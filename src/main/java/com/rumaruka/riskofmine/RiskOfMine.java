@@ -80,14 +80,14 @@ public class RiskOfMine {
     private void clientSetup(final FMLClientSetupEvent event) {
 
         MenuScreens.register(ROMContainerTypes.SMALL_CHEST, BaseScreen::new);
-//        MenuScreens.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
-//        MenuScreens.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
-//        MenuScreens.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
+        MenuScreens.register(ROMContainerTypes.LARGE_CHEST, BaseScreen::new);
+        MenuScreens.register(ROMContainerTypes.LEGENDARY_CHEST, BaseScreen::new);
+        MenuScreens.register(ROMContainerTypes.LUNAR_CHEST, BaseScreen::new);
 
 
         MenuScreens.register(ROMContainerTypes.MULTI_SHOP, BaseShopScreen::new);
-//        MenuScreens.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
-//
+        MenuScreens.register(ROMContainerTypes.EQUIPMENT_TRIPLE_BARREL, BaseShopScreen::new);
+
         ROMEntityRegister.renderEntity();
 
 

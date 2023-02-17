@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
@@ -12,18 +13,18 @@ import java.util.Locale;
 import static com.rumaruka.riskofmine.RiskOfMine.rl;
 
 public enum Chest implements StringRepresentable {
-    LUNAR(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    RUSTY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    EQUIPMENT_TRIPLE_BARREL(3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
-    MULTI_SHOP(3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
-    EQUIPMENT_BARREL(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    LEGENDARY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    LARGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    SMALL(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    DAMAGE(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    HEALING(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    UTILITY(1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
-    NULL_SIZE(0, 0, 0, 0, null, 0, 0);
+    LUNAR("lunar",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    RUSTY("rusty",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    EQUIPMENT_TRIPLE_BARREL("equipment_triple_barrel",3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
+    MULTI_SHOP("multi_shop",3, 1, 184, 184, rl("textures/gui/dirt_triple_container.png"), 256, 256),
+    EQUIPMENT_BARREL("equipment_barrel",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    LEGENDARY("legendary",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    LARGE("large",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    SMALL("small",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    DAMAGE("damage",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    HEALING("healing",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    UTILITY("utility",1, 1, 184, 184, rl("textures/gui/dirt_container.png"), 256, 256),
+    NULL_SIZE("",0, 0, 0, 0, null, 0, 0);
 
     private final String name;
     public final int size;
@@ -39,7 +40,7 @@ public enum Chest implements StringRepresentable {
         this(null, size, rowLength, xSize, ySize, guiTexture, textureXSize, textureYSize);
     }
 
-    Chest(@Nullable String name, int size, int rowLength, int xSize, int ySize, ResourceLocation guiTexture, int textureXSize, int textureYSize) {
+    Chest(String name, int size, int rowLength, int xSize, int ySize, ResourceLocation guiTexture, int textureXSize, int textureYSize) {
         this.name = name;
         this.size = size;
         this.rowLength = rowLength;
@@ -55,7 +56,7 @@ public enum Chest implements StringRepresentable {
     }
 
     public String getId() {
-        return this.name().toLowerCase(Locale.ROOT);
+        return this.getName().toLowerCase(Locale.ROOT);
     }
 
     public String getEnglishName() {
@@ -68,15 +69,19 @@ public enum Chest implements StringRepresentable {
         return this.getEnglishName();
     }
 
+    @NotNull
+    public String getName() {
+        return name;
+    }
 
     public static Block get(Chest type) {
         switch (type) {
             case SMALL:
                 return ROMBlocks.SMALL_CHEST;
-//            case LARGE:
-//                return ROMBlocks.LARGE_CHEST;
-//            case LEGENDARY:
-//                return ROMBlocks.LEGENDARY_CHEST;
+            case LARGE:
+                return ROMBlocks.LARGE_CHEST;
+            case LEGENDARY:
+                return ROMBlocks.LEGENDARY_CHEST;
 //            case EQUIPMENT_BARREL:
 //                return ROMBlocks.EQUIPMENT_BARREL;
 //            case RUSTY:
@@ -87,12 +92,12 @@ public enum Chest implements StringRepresentable {
 //                return ROMBlocks.HEALING_CHEST;
 //            case UTILITY:
 //                return ROMBlocks.UTILITY_CHEST;
-//            case LUNAR:
-//                return ROMBlocks.LUNAR_CHEST;
+            case LUNAR:
+                return ROMBlocks.LUNAR_CHEST;
             case MULTI_SHOP:
                 return ROMBlocks.MULTI_SHOP;
-//            case EQUIPMENT_TRIPLE_BARREL:
-//                return ROMBlocks.EQUIPMENT_TRIPLE_BARREL;
+            case EQUIPMENT_TRIPLE_BARREL:
+                return ROMBlocks.EQUIPMENT_TRIPLE_BARREL;
             default:
                 return Blocks.CHEST;
         }
