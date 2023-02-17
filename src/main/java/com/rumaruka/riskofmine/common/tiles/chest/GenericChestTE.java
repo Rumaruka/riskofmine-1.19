@@ -33,7 +33,6 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 public abstract class GenericChestTE extends RandomizableContainerBlockEntity implements LidBlockEntity {
 
-    private static final int EVENT_SET_OPEN_COUNT = 1;
     private NonNullList<ItemStack> items;
 
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {

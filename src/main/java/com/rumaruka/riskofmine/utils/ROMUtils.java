@@ -2,14 +2,20 @@ package com.rumaruka.riskofmine.utils;
 
 import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.api.Category;
+import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
+import net.minecraft.world.level.ExplosionDamageCalculator;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +90,20 @@ public class ROMUtils {
         return false;
     }
 
+
+    public static boolean checkCurios(Player player, Item item) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
+            ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
+            if (curioStack.getItem() == item) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+    private ExplosionDamageCalculator makeNewEDC(Entity entity){
+        return new EntityBasedExplosionDamageCalculator(entity);
+    }
     public static void replaceItem(ItemStack used, ItemStack scrap) {
         used.shrink(1);
         scrap.shrink(-1);

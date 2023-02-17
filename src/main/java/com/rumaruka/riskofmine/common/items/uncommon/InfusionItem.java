@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import java.util.UUID;
 
 public class InfusionItem extends BaseCollectablesItem {
-    private static final UUID uuid1 = UUID.randomUUID();
+    public static final UUID uuid1 = UUID.randomUUID();
     public InfusionItem() {
         super(Types.UNCOMMON,Category.UTILITY,64);
     }

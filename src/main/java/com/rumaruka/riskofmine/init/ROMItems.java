@@ -14,8 +14,8 @@ import com.rumaruka.riskofmine.common.items.uncommon.OldWarStealthkitItem;
 import com.rumaruka.riskofmine.common.items.voiditems.SaferSpacesItem;
 import com.rumaruka.riskofmine.common.items.voiditems.TentabaubleItem;
 import com.rumaruka.riskofmine.common.items.voiditems.WeepingFungusItem;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
@@ -67,6 +67,8 @@ public class ROMItems {
 
 
     public static LunarCoinItem LUNAR_COIN = promise();
+
+
 
 
 //    public static BlockItem SMALL_CHEST = promise();
@@ -155,6 +157,7 @@ public class ROMItems {
                 EMPTY_ELIXIR,
                 TOUGHER_TIMES,
                 SAFER_SPACES,
+
                 LUNAR_COIN
         ));
     }

@@ -29,6 +29,8 @@ public class BaseCollectablesItem extends Item implements ICurioItem {
 
 
 
+
+
     public int getSizeStack() {
         return sizeStack;
     }

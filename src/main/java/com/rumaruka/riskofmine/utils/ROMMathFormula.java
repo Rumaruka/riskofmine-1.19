@@ -28,7 +28,7 @@ public class ROMMathFormula {
 
     public static float explodeIncreasing(float x) {
 
-        return ROMMathUtils.percent(x) - Math.abs(10) / 20f;
+        return ROMMathUtils.divide(ROMMathUtils.percent(x) - Math.abs(10),2) ;
 
 
     }

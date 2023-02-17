@@ -9,9 +9,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -94,8 +96,10 @@ public class StickyBombEntity extends Entity {
 
     }
     protected void explode() {
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), ROMMathFormula.explodeIncreasing(ROMItems.STICKY_BOMB.getSizeStack()), Level.ExplosionInteraction.TNT);
+        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), ROMMathFormula.explodeIncreasing(ROMItems.STICKY_BOMB.getSizeStack()), Level.ExplosionInteraction.MOB);
     }
+
+
 
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putShort("Fuse", (short)this.getFuse());

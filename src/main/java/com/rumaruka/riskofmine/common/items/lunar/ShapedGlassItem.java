@@ -20,7 +20,8 @@ import java.util.UUID;
 
 public class ShapedGlassItem extends BaseCollectablesItem {
 
-    public final UUID healthModifierID = UUID.fromString("208b4d4c-50ef-4b45-a097-4bed633cdbff");
+    public static final UUID healthModifierID = UUID.fromString("208b4d4c-50ef-4b45-a097-4bed633cdbff");
+
     public ShapedGlassItem() {
         super(Types.LUNAR, Category.DAMAGE, 1);
     }
@@ -44,7 +45,7 @@ public class ShapedGlassItem extends BaseCollectablesItem {
         LivingEntity livingEntity = slotContext.entity();
         if (!livingEntity.level.isClientSide()) {
             Player playerEntity = (Player) livingEntity;
-            playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(slotContext,playerEntity.getUUID(), stack));
+            playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(slotContext, playerEntity.getUUID(), stack));
         }
         super.curioTick(slotContext, stack);
     }
@@ -55,8 +56,8 @@ public class ShapedGlassItem extends BaseCollectablesItem {
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modificator", 64, AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.MAX_HEALTH, new AttributeModifier(healthModifierID, "Health Minus", -16, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modificator", 64, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.MAX_HEALTH, new AttributeModifier(healthModifierID, "Health Minus", -16, AttributeModifier.Operation.ADDITION));
 
         defaultModifiers = builder.build();
         return defaultModifiers;
