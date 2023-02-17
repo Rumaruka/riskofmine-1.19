@@ -21,16 +21,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class HealthOrbEntity extends Entity {
-    private static final int LIFETIME = 6000;
-    private static final int ENTITY_SCAN_PERIOD = 20;
-    private static final int MAX_FOLLOW_DIST = 8;
-    private static final int ORB_GROUPS_PER_AREA = 40;
-    private static final double ORB_MERGE_DISTANCE = 0.5D;
+
     private int age;
     private int health = 1;
     public int value;
@@ -48,8 +46,8 @@ public class HealthOrbEntity extends Entity {
     public HealthOrbEntity(EntityType<? extends HealthOrbEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-
-    protected Entity.MovementEmission getMovementEmission() {
+    @NotNull
+    protected Entity. MovementEmission getMovementEmission() {
         return Entity.MovementEmission.NONE;
     }
 
@@ -64,14 +62,14 @@ public class HealthOrbEntity extends Entity {
         this.xo = this.getX();
         this.yo = this.getY();
         this.zo = this.getZ();
-        if (this.isEyeInFluid(FluidTags.WATER)) {
+        if (this.isEyeInFluidType(ForgeMod.WATER_TYPE.get())) {
             this.setUnderwaterMovement();
         } else if (!this.isNoGravity()) {
             this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.03D, 0.0D));
         }
 
         if (this.level.getFluidState(this.blockPosition()).is(FluidTags.LAVA)) {
-            this.setDeltaMovement((double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F), (double) 0.2F, (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F));
+            this.setDeltaMovement(((this.random.nextFloat() - this.random.nextFloat()) * 0.2F), 0.2F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
         }
 
         if (!this.level.noCollision(this.getBoundingBox())) {
@@ -315,10 +313,13 @@ public class HealthOrbEntity extends Entity {
         return false;
     }
 
+    @NotNull
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
+
+    @NotNull
     public SoundSource getSoundSource() {
         return SoundSource.AMBIENT;
     }
