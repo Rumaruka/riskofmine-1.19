@@ -10,6 +10,7 @@ import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.init.*;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
+import com.rumaruka.riskofmine.world.ROMBiomeModifier;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -49,9 +50,13 @@ public class RiskOfMine {
         instance = this;
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         TimeCoreAPI.setup(this);
+
+
+
         eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
         MinecraftForge.EVENT_BUS.register(this);
+
         ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             // Client setup
@@ -61,7 +66,6 @@ public class RiskOfMine {
         eventBus.addListener(ROMOverlayRender::registerKeys);
         logger.info("Network Risk Of Mine setuping");
         ROMNetwork.setup();
-
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
         ROMEffects.POTIONS.register(eventBus);

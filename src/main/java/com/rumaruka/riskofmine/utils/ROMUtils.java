@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.utils;
 
 import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.api.Category;
+import com.rumaruka.riskofmine.common.items.BaseCollectablesItem;
 import com.rumaruka.riskofmine.init.ROMItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -78,8 +79,36 @@ public class ROMUtils {
         return category == MobEffectCategory.HARMFUL;
     }
 
+    public static int counting (Player player, Item item)
+       {
 
+
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack itemStack = player.getInventory().getItem(i);
+                if (itemStack.getItem() == item) {
+
+                    return itemStack.getCount();
+                }
+
+            }
+            return 0;
+    }
+    public static int countingCurio (Player player, Item item)
+    {
+
+
+
+            ItemStack itemStack = curiosItemStack(player, item);
+            if (itemStack.getItem() == item) {
+
+                return itemStack.getCount();
+
+
+        }
+        return 0;
+    }
     public static boolean checkInventory(Player player, Item item) {
+
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack itemStack = player.getInventory().getItem(i);
             if (itemStack.getItem() == item) {
@@ -89,7 +118,13 @@ public class ROMUtils {
         }
         return false;
     }
-
+    public static ItemStack curiosItemStack(Player player, Item item) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
+            return CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
 
     public static boolean checkCurios(Player player, Item item) {
         if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {

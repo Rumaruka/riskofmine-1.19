@@ -117,7 +117,7 @@ public class ROMItems {
             REGISTER.register("lunar_coin", LunarCoinItem::new);
 
 
-//            REGISTER.register("small_chest", () -> new BlockItem(ROMBlocks.SMALL_CHEST, new Item.Properties()));
+//            REGISTER.register("small_chest.json", () -> new BlockItem(ROMBlocks.SMALL_CHEST, new Item.Properties()));
 //            REGISTER.register("multi_shop", () -> new BlockItem(ROMBlocks.MULTI_SHOP, new Item.Properties()));
         }
     }

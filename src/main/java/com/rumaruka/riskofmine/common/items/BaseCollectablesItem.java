@@ -24,7 +24,7 @@ public class BaseCollectablesItem extends Item implements ICurioItem {
 
     @Override
     public int getMaxStackSize(ItemStack stack) {
-        return sizeStack;
+        return getSizeStack();
     }
 
 

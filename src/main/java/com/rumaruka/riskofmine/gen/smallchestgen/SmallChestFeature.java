@@ -1,4 +1,4 @@
-package com.rumaruka.riskofmine.world;
+package com.rumaruka.riskofmine.gen.smallchestgen;
 
 import com.mojang.serialization.Codec;
 import com.rumaruka.riskofmine.datagen.loot.ROMLootTables;
@@ -16,18 +16,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 import java.util.stream.IntStream;
 
-public class SmallChestFeature extends Feature<NoneFeatureConfiguration> {
-    public SmallChestFeature(Codec<NoneFeatureConfiguration> pCodec) {
+public class SmallChestFeature<C>extends Feature<SmallChestFeatureConfig> {
+    public SmallChestFeature(Codec<SmallChestFeatureConfig> pCodec) {
         super(pCodec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> pContext) {
+    public boolean place(FeaturePlaceContext<SmallChestFeatureConfig> pContext) {
         RandomSource randomsource = pContext.random();
         WorldGenLevel worldgenlevel = pContext.level();
         ChunkPos chunkpos = new ChunkPos(pContext.origin());
