@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
+import com.rumaruka.riskofmine.mixin.LocalPlayerMixin;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
 import com.rumaruka.riskofmine.utils.ROMUtils;

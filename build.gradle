@@ -20,13 +20,14 @@ plugins {
 }
 
 apply plugin: 'org.spongepowered.mixin'
-apply from: 'https://raw.githubusercontent.com/TimeConqueror/Time-Core/1.19/gradle/scripts/timecore.gradle'
+apply from: 'https://raw.githubusercontent.com/TimeConqueror/Time-Core/1.19.3/gradle/scripts/timecore.gradle'
 
 version = '1.0'
 group = 'com.rumaruka.riskofmine'
 archivesBaseName = 'riskofmine'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -125,21 +126,27 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven { url 'https://maven.blamejared.com' }
+
 }
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.16'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.3-5.1.2.0")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.19.3-5.1.2.0:api")
+
 
 
     compileOnly fg.deobf("mezz.jei:jei-1.19.3-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-1.19.3-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-1.19.3-forge:${jei_version}")
 
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:4440332") // JER
 
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78")
 
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

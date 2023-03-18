@@ -1,19 +1,23 @@
 package com.rumaruka.riskofmine.compat.jer;
 
 import com.rumaruka.riskofmine.datagen.loot.ROMLootTables;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import jeresources.api.IJERAPI;
+import jeresources.api.IJERPlugin;
+import jeresources.api.JERPlugin;
 
-public class ROMJerPlugin {
-//    @JERPlugin
-//    public static IJERAPI jerAPI;
+@JERPlugin
+public class ROMJerPlugin implements IJERPlugin {
 
-    public static void setup(FMLCommonSetupEvent e){
-        initDungeonLoot();
+
+    private static void initDungeonLoot(IJERAPI jerAPI) {
+
+        jerAPI.getDungeonRegistry().registerChest("RiskOfMine: Small Chest", ROMLootTables.SMALL_CHEST);
+
     }
 
-    private static void initDungeonLoot() {
-//        IDungeonRegistry dungeonRegistry = jerAPI.getDungeonRegistry();
-//        dungeonRegistry.registerChest("RiskOfMine: Small Chest", ROMLootTables.SMALL_CHEST);
+    @Override
+    public void receive(IJERAPI ijerapi) {
+        initDungeonLoot(ijerapi);
 
     }
 }

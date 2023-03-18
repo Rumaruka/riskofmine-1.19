@@ -9,6 +9,7 @@ import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
 import com.rumaruka.riskofmine.common.items.lunar.BeadsOfFealtyItem;
 import com.rumaruka.riskofmine.common.items.lunar.ShapedGlassItem;
 import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
+import com.rumaruka.riskofmine.common.items.uncommon.HopooFeatherItem;
 import com.rumaruka.riskofmine.common.items.uncommon.InfusionItem;
 import com.rumaruka.riskofmine.common.items.uncommon.OldWarStealthkitItem;
 import com.rumaruka.riskofmine.common.items.voiditems.SaferSpacesItem;
@@ -27,7 +28,6 @@ import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 @AutoRegistrable.Entries("item")
 public class ROMItems {
-    //   public static Item TEST   ;
     public static ArmorPiercingRoundsItem ARMOR_PIERCING_ROUNDS = promise();
     public static BustlingFungusItem BUSTLING_FUNGUS = promise();
 
@@ -46,6 +46,8 @@ public class ROMItems {
     public static AlienHeadItem ALIEN_HEAD = promise();
     public static OldWarStealthkitItem OLD_WAR_STEALTHKIT = promise();
     public static TriTipDaggerItem TRI_TIP_DAGGER = promise();
+
+    public static HopooFeatherItem HOPOO_FEATHER =promise();
     public static StunGrenadeItem STUN_GRENADE = promise();
     //    //    public static  WarbannerItem WARBANNER   ;
 //    //public static TheCrowdFunderItem THE_CROWDFUNDER   ;
@@ -71,8 +73,6 @@ public class ROMItems {
 
 
 
-//    public static BlockItem SMALL_CHEST = promise();
-//    public static BlockItem MULTI_SHOP = promise();
 
 
     private static class Init {
@@ -113,6 +113,7 @@ public class ROMItems {
             REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("item/empty_bottle"));
             REGISTER.register("tougher_times", TougherTimesItem::new).defaultModel(tl("item/tougher_times"));
             REGISTER.register("safer_spaces", SaferSpacesItem::new).defaultModel(tl("item/safer_spaces"));
+            REGISTER.register("hopoo_feather", HopooFeatherItem::new).defaultModel(tl("item/hopoo_feather"));
 
             REGISTER.register("lunar_coin", LunarCoinItem::new);
 
@@ -124,8 +125,7 @@ public class ROMItems {
 
     public static ArrayList<Item> getAllItem() {
         return (Lists.newArrayList(
-                // TEST,
-//                SMALL_CHEST, MULTI_SHOP,
+
                 ARMOR_PIERCING_ROUNDS,
                 BUSTLING_FUNGUS,
                 GASOLINE,
@@ -152,6 +152,7 @@ public class ROMItems {
                 BISON_STEAK,
                 // COMMON_ITEM_SCRAP,
                 //  UNCOMMON_ITEM_SCRAP,
+                HOPOO_FEATHER,
                 WEEPING_FUNGUS,
                 POWER_ELIXIR,
                 EMPTY_ELIXIR,

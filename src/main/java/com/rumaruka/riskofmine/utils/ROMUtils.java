@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ambient.AmbientCreature;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -79,13 +80,13 @@ public class ROMUtils {
         return category == MobEffectCategory.HARMFUL;
     }
 
-    public static int counting (Player player, Item item)
+    public static int counting (Player player, ItemStack item)
        {
 
 
             for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                 ItemStack itemStack = player.getInventory().getItem(i);
-                if (itemStack.getItem() == item) {
+                if (ItemStack.isSame(itemStack,item)) {
 
                     return itemStack.getCount();
                 }
@@ -107,11 +108,12 @@ public class ROMUtils {
         }
         return 0;
     }
-    public static boolean checkInventory(Player player, Item item) {
+    public static boolean checkInventory(Player player, ItemStack item) {
 
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack itemStack = player.getInventory().getItem(i);
-            if (itemStack.getItem() == item) {
+        Inventory inventory = player.getInventory();
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack itemStack = inventory.getItem(i);
+            if (ItemStack.isSame(itemStack,item)) {
                 return true;
             }
 
@@ -126,10 +128,10 @@ public class ROMUtils {
         }
     }
 
-    public static boolean checkCurios(Player player, Item item) {
-        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
-            ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
-            if (curioStack.getItem() == item) {
+    public static boolean checkCurios(Player player, ItemStack item) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item.getItem()).isPresent()) {
+            ItemStack curioStack = curiosItemStack(player, item.getItem());
+            if (ItemStack.isSame(curioStack,item)) {
                 return true;
             }
 

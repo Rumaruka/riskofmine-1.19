@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.common.events;
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
+import com.rumaruka.riskofmine.init.ROMDoubleEffect;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.init.ROMSounds;
@@ -44,68 +45,66 @@ public class ItemsEvent {
             Level level = livingEntity.level;
             if (!level.isClientSide) {
 
-                if (ROMUtils.checkInventory(player, ROMItems.ARMOR_PIERCING_ROUNDS)) {
+                if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS))) {
                     if ((event.getEntity() instanceof WitherBoss || event.getEntity() instanceof EnderDragon || !event.getEntity().canChangeDimensions())) {
-                        event.getEntity().hurt(DamageSource.MAGIC, ROMUtils.counting(player,ROMItems.ARMOR_PIERCING_ROUNDS) * 2 - 1);
+                        event.getEntity().hurt(DamageSource.MAGIC, ROMUtils.counting(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS)) * 2 - 1);
 
                     }
                 }
-                if (ROMUtils.checkInventory(player, ROMItems.CROWBAR)) {
+                if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.CROWBAR))) {
                     if (event.getEntity() instanceof AmbientCreature) {
                         if (((AmbientCreature) event.getEntity()).getHealth() > (((AmbientCreature) event.getEntity()).getMaxHealth() * 90 / 100)) {
 
-                            event.getEntity().hurt(DamageSource.MAGIC, (float) (ROMUtils.counting(player, ROMItems.CROWBAR) * 1.00115d));
+                            event.getEntity().hurt(DamageSource.MAGIC, (float) (ROMUtils.counting(player, new ItemStack(ROMItems.CROWBAR)) * 1.00115d));
                         }
                     }
                 }
-                    if (ROMUtils.checkInventory(player, ROMItems.GASOLINE)) {
-                        if (event.getEntity() instanceof AmbientCreature) {
+                if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.GASOLINE))) {
+                    if (event.getEntity() instanceof AmbientCreature) {
 
 
-                            event.getEntity().setRemainingFireTicks(ROMUtils.counting(player, ROMItems.GASOLINE) * 20);
+                        event.getEntity().setRemainingFireTicks(ROMUtils.counting(player, new ItemStack(ROMItems.GASOLINE)) * 20);
+                    }
+                }
+                if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS))) {
+                    ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.ARMOR_PIERCING_ROUNDS);
+
+                    if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && event.getEntity() instanceof AmbientCreature) {
+                        if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && (event.getEntity() instanceof WitherBoss || event.getEntity() instanceof EnderDragon || !event.getEntity().canChangeDimensions())) {
+                            event.getEntity().hurt(DamageSource.MAGIC, curioStack.getCount() * 2 - 1);
                         }
                     }
-                    if (ROMUtils.checkCurios(player, ROMItems.ARMOR_PIERCING_ROUNDS)) {
-                        ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.ARMOR_PIERCING_ROUNDS);
-
-                        if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && event.getEntity() instanceof AmbientCreature) {
-                            if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && (event.getEntity() instanceof WitherBoss || event.getEntity() instanceof EnderDragon || !event.getEntity().canChangeDimensions())) {
-                                event.getEntity().hurt(DamageSource.MAGIC, curioStack.getCount() * 2 - 1);
-                            }
-                        }
-                    }
-                    if (ROMUtils.checkCurios(player, ROMItems.CROWBAR)) {
-                        ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.CROWBAR);
-
-                        if (((AmbientCreature) event.getEntity()).getHealth() > (((AmbientCreature) event.getEntity()).getMaxHealth() * 90 / 100)) {
-
-                            event.getEntity().hurt(DamageSource.MAGIC, (float) (curioStack.getCount() * 1.00115d));
-                        }
-                    }
-
                 }
-                if (ROMUtils.checkCurios(player, ROMItems.GASOLINE)) {
-                    ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.GASOLINE);
+                if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.CROWBAR))) {
+                    ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.CROWBAR);
 
-                    if (curioStack.getItem() == ROMItems.GASOLINE && event.getEntity() instanceof AmbientCreature) {
-                        event.getEntity().setRemainingFireTicks(curioStack.getCount() * 20);
+                    if (((AmbientCreature) event.getEntity()).getHealth() > (((AmbientCreature) event.getEntity()).getMaxHealth() * 90 / 100)) {
+
+                        event.getEntity().hurt(DamageSource.MAGIC, (float) (curioStack.getCount() * 1.00115d));
                     }
-
-                }
-                if (ROMUtils.checkInventory(player, ROMItems.STICKY_BOMB)) {
-                    StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (Mob) event.getEntity());
-                    level.addFreshEntity(entityStickyBomb);
-                }
-                if (ROMUtils.checkCurios(player, ROMItems.STICKY_BOMB)) {
-                    StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (Mob) event.getEntity());
-                    level.addFreshEntity(entityStickyBomb);
-
                 }
 
             }
+            if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.GASOLINE))) {
+                ItemStack curioStack = ROMUtils.curiosItemStack(player, ROMItems.GASOLINE);
+
+                if (curioStack.getItem() == ROMItems.GASOLINE && event.getEntity() instanceof AmbientCreature) {
+                    event.getEntity().setRemainingFireTicks(curioStack.getCount() * 20);
+                }
+
+            }
+            if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.STICKY_BOMB))) {
+                StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (Mob) event.getEntity());
+                level.addFreshEntity(entityStickyBomb);
+            }
+            if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.STICKY_BOMB))) {
+                StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, (Mob) event.getEntity());
+                level.addFreshEntity(entityStickyBomb);
+
+            }
+
         }
-
-
+    }
 
 
     /**
@@ -243,20 +242,18 @@ public class ItemsEvent {
         if (!level.isClientSide) {
             if (player != null) {
 
-                    if (ROMUtils.checkInventory(player,ROMItems.FOCUS_CRYSTAL)){
-                        if (livingEntity instanceof Mob) {
-                            float distance = player.distanceTo(livingEntity);
+                if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.FOCUS_CRYSTAL))) {
+                    if (livingEntity instanceof Mob) {
+                        float distance = player.distanceTo(livingEntity);
 
-                            if (distance <= 3.5) {
-                                livingEntity.hurt(DamageSource.MAGIC, ROMMathFormula.powerIncreasing(ROMUtils.counting(player,ROMItems.FOCUS_CRYSTAL), 5.0f));
-                                RiskOfMine.logger.info(ROMUtils.counting(player, ROMItems.FOCUS_CRYSTAL));
-                                ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
-                            }
-
-
+                        if (distance <= 3.5) {
+                            livingEntity.hurt(DamageSource.MAGIC, ROMMathFormula.powerIncreasing(ROMUtils.counting(player, new ItemStack(ROMItems.FOCUS_CRYSTAL)), 5.0f, 5));
+                            ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
                         }
-                    }
 
+
+                    }
+                }
 
 
                 if (livingEntity instanceof Mob) {
@@ -274,6 +271,19 @@ public class ItemsEvent {
 
                     }
                 }
+
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityJump(LivingEvent.LivingJumpEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof Player player) {
+               if( ROMUtils.checkInventory(player,new ItemStack(ROMItems.HOPOO_FEATHER))){
+
+                       ROMDoubleEffect.play(player);
+
 
             }
         }

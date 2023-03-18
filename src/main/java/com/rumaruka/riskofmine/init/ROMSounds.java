@@ -23,7 +23,8 @@ public class ROMSounds {
             () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.proc.mt_spawn")));
     public static final RegistryObject<SoundEvent> PROC_MT_IMPACT = REGISTER.register("riskofmine.proc.mt_impact",
             () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.proc.mt_impact")));
-
+    public static final RegistryObject<SoundEvent> ROM_PLAYER_FEATHER = REGISTER.register("riskofmine.player.feather_1",
+            () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.player.feather_1")));
     public static final RegistryObject<SoundEvent> ROM_PLAYER_LEVEL_UP = REGISTER.register("riskofmine.player.level_up",
             () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.player.level_up")));
 }

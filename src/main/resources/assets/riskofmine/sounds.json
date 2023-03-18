@@ -25,6 +25,11 @@
       "riskofmine:riskofmine.proc.mt_impact"
     ]
   },
+  "riskofmine.player.feather_1": {
+    "sounds": [
+      "riskofmine:riskofmine.player.feather_1"
+    ]
+  },
   "riskofmine.player.level_up": {
     "sounds": [
       "riskofmine:riskofmine.player.level_up"

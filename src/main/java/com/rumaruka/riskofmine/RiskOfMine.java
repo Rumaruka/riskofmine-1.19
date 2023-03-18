@@ -8,9 +8,11 @@ import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
-import com.rumaruka.riskofmine.init.*;
+import com.rumaruka.riskofmine.init.ROMContainerTypes;
+import com.rumaruka.riskofmine.init.ROMEffects;
+import com.rumaruka.riskofmine.init.ROMParticles;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
-import com.rumaruka.riskofmine.world.ROMBiomeModifier;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -53,9 +55,8 @@ public class RiskOfMine {
 
 
 
-        eventBus.addListener(this::setup);
         eventBus.addListener(this::enqueueIMC);
-        MinecraftForge.EVENT_BUS.register(this);
+
 
         ROMSounds.REGISTER.register(eventBus);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -70,15 +71,11 @@ public class RiskOfMine {
         ROMEffects.EFFECTS.register(eventBus);
         ROMEffects.POTIONS.register(eventBus);
 
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
 
-    private void setup(final FMLCommonSetupEvent event) {
 
-        if (MOD_LIST.isLoaded("jeresources")) {
-             ROMJerPlugin.setup(event);
-        }
-    }
 
     @OnlyIn(Dist.CLIENT)
     private void clientSetup(final FMLClientSetupEvent event) {

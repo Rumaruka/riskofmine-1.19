@@ -1,7 +1,10 @@
 package com.rumaruka.riskofmine.ntw;
 import com.rumaruka.riskofmine.ntw.helper.ISimplePacket;
+import com.rumaruka.riskofmine.ntw.packets.DoubleJumpPacket;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
+import com.rumaruka.riskofmine.utils.ROMUtils;
+import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,6 +28,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -69,6 +73,8 @@ public class ROMNetwork {
                 .decoder(ItemActivationPacket::new)
                 .consumerMainThread(ItemActivationPacket::handle)
                 .add();
+        network.registerMessage(nextID(), DoubleJumpPacket.class,DoubleJumpPacket::toBytes,DoubleJumpPacket::new,DoubleJumpPacket::handle);
+
     }
 
     /**
@@ -114,7 +120,7 @@ public class ROMNetwork {
      * @param target  Packet target
      * @param message Packet to send
      */
-    public void send(PacketDistributor.PacketTarget target, Object message) {
+    public  void send(PacketDistributor.PacketTarget target, Object message) {
         network.send(target, message);
     }
 
@@ -186,4 +192,6 @@ public class ROMNetwork {
             sendToClientsAround(msg, (ServerLevel) world, position);
         }
     }
+
+
 }

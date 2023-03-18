@@ -6,15 +6,18 @@ import net.minecraft.world.entity.player.Player;
 
 public class ROMMathFormula {
 
-    /*
-      * This Math Class for mod
-      * powerIncreasing - method for FOCUS_CRYSTAL
-      * speedIncreasing - method for ENERGY_DRINK
-      * explodeIncreasing - method for STICKY_BOMB
+    /**
+      @apiNote This Math Class for mod
+      <ul> powerIncreasing - method powerIncreasing(
+      @param x  - first parameter,
+      @param y - second parameter, @param
+      @param percent - percent ¯\_(ツ)_/¯)</ul>
+     * speedIncreasing - method for ENERGY_DRINK
+     * explodeIncreasing - method for STICKY_BOMB
      */
-    public static float powerIncreasing(float x, float y) {
+    public static float powerIncreasing(float x, float y, int percent) {
 
-        return Math.abs((float) ROMMathUtils.multiply(x, y)) / 30 - (ROMMathUtils.percent(5) + ROMMathUtils.percent(x * y));
+        return Math.abs((float) ROMMathUtils.multiply(x, y)) / 30 - (ROMMathUtils.percent(percent) + ROMMathUtils.percent(x * y));
 
 
     }
@@ -28,7 +31,7 @@ public class ROMMathFormula {
 
     public static float explodeIncreasing(float x) {
 
-        return ROMMathUtils.divide(ROMMathUtils.percent(x) - Math.abs(10),2) ;
+        return ROMMathUtils.divide(ROMMathUtils.percent(x) - Math.abs(10), 2);
 
 
     }
