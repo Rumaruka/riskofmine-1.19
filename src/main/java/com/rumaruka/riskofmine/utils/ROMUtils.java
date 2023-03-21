@@ -17,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.ExplosionDamageCalculator;
+import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.ArrayList;
@@ -35,7 +36,9 @@ public class ROMUtils {
     public static Minecraft getMc() {
         return mc;
     }
-
+    public static Level getLvL(){
+        return mc.level;
+    }
 
     public static Player getPlayer() {
         return mc.player;

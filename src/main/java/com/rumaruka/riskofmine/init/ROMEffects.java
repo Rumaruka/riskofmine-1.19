@@ -32,4 +32,5 @@ public class ROMEffects {
     public static final RegistryObject<MobEffect> MALACHITE = EFFECTS.register("malachite",()->new MalachiteMobs(MobEffectCategory.BENEFICIAL,5646433));
     public static final RegistryObject<MobEffect> OVERLOADING = EFFECTS.register("overloading",()->new OverloadingMobs(MobEffectCategory.BENEFICIAL,5646433));
     public static final RegistryObject<MobEffect> PERFECTED = EFFECTS.register("perfected",()->new PerfectedMobs(MobEffectCategory.BENEFICIAL,5646433));
+    public static final RegistryObject<MobEffect> MENDING = EFFECTS.register("mending",()->new MendingMobs(MobEffectCategory.BENEFICIAL,5646433));
 }

@@ -1,9 +1,8 @@
 package com.rumaruka.riskofmine.common.events;
 
-import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
-import com.rumaruka.riskofmine.init.ROMDoubleEffect;
+import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.init.ROMSounds;
