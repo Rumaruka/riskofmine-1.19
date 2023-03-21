@@ -7,7 +7,6 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.compat.jer.ROMJerPlugin;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.init.ROMParticles;
@@ -27,7 +26,6 @@ import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -54,7 +52,6 @@ public class RiskOfMine {
         TimeCoreAPI.setup(this);
 
 
-
         eventBus.addListener(this::enqueueIMC);
 
 
@@ -73,8 +70,6 @@ public class RiskOfMine {
 
         MinecraftForge.EVENT_BUS.register(this);
     }
-
-
 
 
     @OnlyIn(Dist.CLIENT)

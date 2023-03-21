@@ -1,5 +1,6 @@
-package com.rumaruka.riskofmine.init;
+package com.rumaruka.riskofmine.utils;
 
+import com.rumaruka.riskofmine.init.ROMSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;

@@ -1,6 +1,6 @@
 package com.rumaruka.riskofmine.mixin;
 
-import com.rumaruka.riskofmine.init.ROMDoubleEffect;
+import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.DoubleJumpPacket;
@@ -26,7 +26,7 @@ public abstract class LocalPlayerMixin {
         LocalPlayer player = (LocalPlayer) (Object) this;
         if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
             if (player.isOnGround() || player.onClimbable()) {
-                jumpCount = ROMUtils.counting(player, new ItemStack(ROMItems.HOPOO_FEATHER));
+                jumpCount = ROMUtils.counting(player, new ItemStack(ROMItems.HOPOO_FEATHER)) ;
 
             } else if (!jumpedLastTick && jumpCount > 0 && player.getDeltaMovement().y < 0) {
                 if (player.input.jumping && !player.getAbilities().flying) {
