@@ -2,15 +2,13 @@ package com.rumaruka.riskofmine.ntw;
 import com.rumaruka.riskofmine.ntw.helper.ISimplePacket;
 import com.rumaruka.riskofmine.ntw.packets.DoubleJumpPacket;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
+import com.rumaruka.riskofmine.ntw.packets.OverloadingPacket;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
-import com.rumaruka.riskofmine.utils.ROMUtils;
-import net.minecraft.network.protocol.game.ServerGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -21,14 +19,9 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
 
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -74,6 +67,7 @@ public class ROMNetwork {
                 .consumerMainThread(ItemActivationPacket::handle)
                 .add();
         network.registerMessage(nextID(), DoubleJumpPacket.class,DoubleJumpPacket::toBytes,DoubleJumpPacket::new,DoubleJumpPacket::handle);
+        network.registerMessage(nextID(), OverloadingPacket.class, OverloadingPacket::toBytes, OverloadingPacket::new, OverloadingPacket::handle);
 
     }
 

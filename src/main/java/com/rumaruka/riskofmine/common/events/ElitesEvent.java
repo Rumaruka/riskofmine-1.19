@@ -1,18 +1,25 @@
 package com.rumaruka.riskofmine.common.events;
 
+import com.rumaruka.riskofmine.api.entity.IOverloading;
 import com.rumaruka.riskofmine.common.cap.Timer;
 import com.rumaruka.riskofmine.init.ROMEffects;
+import com.rumaruka.riskofmine.ntw.ROMNetwork;
+import com.rumaruka.riskofmine.ntw.packets.OverloadingPacket;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMMathUtils;
 import com.rumaruka.riskofmine.utils.ROMUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.scores.PlayerTeam;
+import net.minecraft.world.scores.Team;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,21 +63,18 @@ public class ElitesEvent {
                     if (!(entity instanceof Player)) {
 
 
-                        System.out.println("Корова спасибо!");
-                        entity.heal((float) (0.01));
+                        anotherEntity.heal(0.01f);
 
 
                     }
                 }
             }
-            if (entity.hasEffect(ROMEffects.OVERLOADING.get())) {
 
-            }
+            ((IOverloading) entity).setOverloading(entity.hasEffect(ROMEffects.OVERLOADING.get()));
 
         }
-
-
     }
+
 
     @SubscribeEvent
     public static void addFunctionForEffectsAttack(LivingEvent.LivingTickEvent event) {
