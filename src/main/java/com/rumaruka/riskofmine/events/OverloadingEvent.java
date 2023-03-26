@@ -14,11 +14,11 @@ import net.minecraftforge.network.PacketDistributor;
 @Mod.EventBusSubscriber
 public class OverloadingEvent {
     @SubscribeEvent
-    public static void onTrackedEntity(PlayerEvent.StartTracking event){
+    public static void onTrackedEntity(PlayerEvent.StartTracking event) {
         Entity target = event.getTarget();
         Player entity = event.getEntity();
-        if (((IOverloading)target).isOverloading()){
-            ROMNetwork.network.send(PacketDistributor.PLAYER.with(()-> (ServerPlayer) entity),new OverloadingPacket(target.getId(),true));
+        if (((IOverloading) target).isOverloading()) {
+            ROMNetwork.network.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) entity), new OverloadingPacket(target.getId(), true));
 
         }
     }

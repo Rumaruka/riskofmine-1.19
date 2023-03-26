@@ -21,7 +21,7 @@ public class ROMDoubleEffect {
         world.playSound(null, new BlockPos(effectPlayer.getX(), effectPlayer.getY(), effectPlayer.getZ()), ROMSounds.ROM_PLAYER_FEATHER.get(), SoundSource.MASTER, 2, 2);
 
 
-        for(int i = 0; i < 5; ++i) {
+        for (int i = 0; i < 5; ++i) {
             double d = r.nextGaussian() * 0.02D;
             double e = r.nextGaussian() * 0.02D;
             double f = r.nextGaussian() * 0.02D;

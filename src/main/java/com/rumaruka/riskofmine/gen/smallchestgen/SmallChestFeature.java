@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.stream.IntStream;
 
-public class SmallChestFeature<C>extends Feature<SmallChestFeatureConfig> {
+public class SmallChestFeature<C> extends Feature<SmallChestFeatureConfig> {
     public SmallChestFeature(Codec<SmallChestFeatureConfig> pCodec) {
         super(pCodec);
     }
@@ -33,8 +33,8 @@ public class SmallChestFeature<C>extends Feature<SmallChestFeatureConfig> {
         IntArrayList intarraylist1 = Util.toShuffledList(IntStream.rangeClosed(chunkpos.getMinBlockZ(), chunkpos.getMaxBlockZ()), randomsource);
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for(Integer integer : intarraylist) {
-            for(Integer integer1 : intarraylist1) {
+        for (Integer integer : intarraylist) {
+            for (Integer integer1 : intarraylist1) {
                 blockpos$mutableblockpos.set(integer, 0, integer1);
                 BlockPos blockpos = worldgenlevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, blockpos$mutableblockpos);
                 if (worldgenlevel.isEmptyBlock(blockpos) || worldgenlevel.getBlockState(blockpos).getCollisionShape(worldgenlevel, blockpos).isEmpty()) {
@@ -42,7 +42,7 @@ public class SmallChestFeature<C>extends Feature<SmallChestFeatureConfig> {
                     RandomizableContainerBlockEntity.setLootTable(worldgenlevel, randomsource, blockpos, ROMLootTables.SMALL_CHEST);
                     BlockState blockstate = Blocks.TORCH.defaultBlockState();
 
-                    for(Direction direction : Direction.Plane.HORIZONTAL) {
+                    for (Direction direction : Direction.Plane.HORIZONTAL) {
                         BlockPos blockpos1 = blockpos.relative(direction);
                         if (blockstate.canSurvive(worldgenlevel, blockpos1)) {
                             worldgenlevel.setBlock(blockpos1, blockstate, 2);

@@ -1,9 +1,9 @@
 package com.rumaruka.riskofmine.mixin;
 
-import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.DoubleJumpPacket;
+import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.effect.MobEffects;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
 public abstract class LocalPlayerMixin {
-    private  int jumpCount = 0;
+    private int jumpCount = 0;
     private boolean jumpedLastTick = false;
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -26,7 +26,7 @@ public abstract class LocalPlayerMixin {
         LocalPlayer player = (LocalPlayer) (Object) this;
         if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
             if (player.isOnGround() || player.onClimbable()) {
-                jumpCount = ROMUtils.counting(player, new ItemStack(ROMItems.HOPOO_FEATHER)) ;
+                jumpCount = ROMUtils.counting(player, new ItemStack(ROMItems.HOPOO_FEATHER));
 
             } else if (!jumpedLastTick && jumpCount > 0 && player.getDeltaMovement().y < 0) {
                 if (player.input.jumping && !player.getAbilities().flying) {
@@ -44,8 +44,6 @@ public abstract class LocalPlayerMixin {
         }
 
     }
-
-
 
 
     private boolean wearingUsableElytra(LocalPlayer player) {

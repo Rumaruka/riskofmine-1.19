@@ -31,5 +31,6 @@ public class FocusCrystalItem extends BaseCollectablesItem {
         if (Screen.hasShiftDown()) {
             tooltip.add(Component.translatable("ror.focus_crystal.info"));
             tooltip.add(Component.translatable("[Stacks:" + pStack.getCount() + "]"));
-        }    }
+        }
+    }
 }

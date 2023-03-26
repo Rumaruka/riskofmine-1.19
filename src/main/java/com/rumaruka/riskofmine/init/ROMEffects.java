@@ -1,8 +1,9 @@
 package com.rumaruka.riskofmine.init;
 
-import com.rumaruka.riskofmine.common.effect.*;
+import com.rumaruka.riskofmine.common.effect.BleedEffect;
+import com.rumaruka.riskofmine.common.effect.NullifiedEffect;
+import com.rumaruka.riskofmine.common.effect.StunEffect;
 import com.rumaruka.riskofmine.common.entity.elite_effect.*;
-
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.item.alchemy.Potion;
@@ -25,12 +26,12 @@ public class ROMEffects {
     public static final RegistryObject<MobEffect> NULLIFIED = EFFECTS.register("nullified", () -> new NullifiedEffect(MobEffectCategory.BENEFICIAL, 5646433));
 
 
-
-    public static final RegistryObject<MobEffect> BLAZING = EFFECTS.register("blazing",()->new BlazingMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> CELESTINE = EFFECTS.register("celestine",()->new CelestineMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> GLACIAL = EFFECTS.register("glacial",()->new GlacialMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> MALACHITE = EFFECTS.register("malachite",()->new MalachiteMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> OVERLOADING = EFFECTS.register("overloading",()->new OverloadingMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> PERFECTED = EFFECTS.register("perfected",()->new PerfectedMobs(MobEffectCategory.BENEFICIAL,5646433));
-    public static final RegistryObject<MobEffect> MENDING = EFFECTS.register("mending",()->new MendingMobs(MobEffectCategory.BENEFICIAL,5646433));
+    public static final RegistryObject<MobEffect> BLAZING = EFFECTS.register("blazing", () -> new BlazingMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> CELESTINE = EFFECTS.register("celestine", () -> new CelestineMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> GLACIAL = EFFECTS.register("glacial", () -> new GlacialMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> MALACHITE = EFFECTS.register("malachite", () -> new MalachiteMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> MALACHITE_ELITES = EFFECTS.register("malachite_elites", () -> new MalachiteElitesMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> OVERLOADING = EFFECTS.register("overloading", () -> new OverloadingMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> PERFECTED = EFFECTS.register("perfected", () -> new PerfectedMobs(MobEffectCategory.BENEFICIAL, 5646433));
+    public static final RegistryObject<MobEffect> MENDING = EFFECTS.register("mending", () -> new MendingMobs(MobEffectCategory.BENEFICIAL, 5646433));
 }

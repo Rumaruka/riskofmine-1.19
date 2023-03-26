@@ -1,18 +1,19 @@
 package com.rumaruka.riskofmine.ntw;
+
 import com.rumaruka.riskofmine.ntw.helper.ISimplePacket;
 import com.rumaruka.riskofmine.ntw.packets.DoubleJumpPacket;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
-import com.rumaruka.riskofmine.ntw.packets.OverloadingPacket;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
+import com.rumaruka.riskofmine.ntw.packets.OverloadingPacket;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -20,19 +21,19 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
 import static com.rumaruka.riskofmine.RiskOfMine.rl;
 import static ru.timeconqueror.timecore.api.util.Hacks.promise;
 
 public class ROMNetwork {
     private static ROMNetwork instance = promise();
     private static final String PROTOCOL_VERSION = Integer.toString(1);
-    public static final SimpleChannel network= NetworkRegistry.ChannelBuilder.named(rl("network"))
+    public static final SimpleChannel network = NetworkRegistry.ChannelBuilder.named(rl("network"))
             .clientAcceptedVersions(PROTOCOL_VERSION::equals)
             .serverAcceptedVersions(PROTOCOL_VERSION::equals)
             .networkProtocolVersion(() -> PROTOCOL_VERSION)
@@ -43,9 +44,11 @@ public class ROMNetwork {
     public ROMNetwork() {
 
     }
+
     public static int nextID() {
         return id++;
     }
+
     public static ROMNetwork getInstance() {
         if (instance == null) {
             throw new IllegalStateException("Attempt to call network getInstance before network is setup");
@@ -53,6 +56,7 @@ public class ROMNetwork {
 
         return instance;
     }
+
     public static void setup() {
         if (instance != null) {
             return;
@@ -60,13 +64,13 @@ public class ROMNetwork {
 
         instance = new ROMNetwork();
         instance.registerPacket(InventoryTopStacksSyncPacket.class, InventoryTopStacksSyncPacket::new, NetworkDirection.PLAY_TO_CLIENT);
-        network.registerMessage(nextID(), OverlayPacket.class,OverlayPacket::toBytes,OverlayPacket::new,OverlayPacket::handle);
+        network.registerMessage(nextID(), OverlayPacket.class, OverlayPacket::toBytes, OverlayPacket::new, OverlayPacket::handle);
         network.messageBuilder(ItemActivationPacket.class, nextID())
                 .encoder(ItemActivationPacket::toBytes)
                 .decoder(ItemActivationPacket::new)
                 .consumerMainThread(ItemActivationPacket::handle)
                 .add();
-        network.registerMessage(nextID(), DoubleJumpPacket.class,DoubleJumpPacket::toBytes,DoubleJumpPacket::new,DoubleJumpPacket::handle);
+        network.registerMessage(nextID(), DoubleJumpPacket.class, DoubleJumpPacket::toBytes, DoubleJumpPacket::new, DoubleJumpPacket::handle);
         network.registerMessage(nextID(), OverloadingPacket.class, OverloadingPacket::toBytes, OverloadingPacket::new, OverloadingPacket::handle);
 
     }
@@ -114,7 +118,7 @@ public class ROMNetwork {
      * @param target  Packet target
      * @param message Packet to send
      */
-    public  void send(PacketDistributor.PacketTarget target, Object message) {
+    public void send(PacketDistributor.PacketTarget target, Object message) {
         network.send(target, message);
     }
 

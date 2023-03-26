@@ -50,7 +50,7 @@ public class EnergyDrinkItem extends BaseCollectablesItem {
         LivingEntity livingEntity = slotContext.entity();
         if (!livingEntity.level.isClientSide()) {
             Player playerEntity = (Player) livingEntity;
-            playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(slotContext, playerEntity.getUUID(),stack));
+            playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(slotContext, playerEntity.getUUID(), stack));
         }
         super.curioTick(slotContext, stack);
     }

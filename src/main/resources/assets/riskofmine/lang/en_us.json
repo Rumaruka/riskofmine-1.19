@@ -30,8 +30,8 @@
   "riskofmine.currentmoney.name": "$",
   "riskofmine.not_money": "No money!",
   "riskofmine.currentlunar.name": "Lunar: ",
-  "riskofmine.currentshields.name": "Shields:",
-  "riskofmine.currentbarrier.name": "Barrier",
+  "riskofmine.currentshields.name": "Shields: ",
+  "riskofmine.currentbarrier.name": "Barrier: ",
   "key.mapping.show_overlay.name": "Show Overlay",
   "key.mapping.category.name": "Risk of Mine",
   "riskofminepedia.name": "RiskofMinePedia"

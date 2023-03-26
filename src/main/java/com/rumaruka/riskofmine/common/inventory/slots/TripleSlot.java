@@ -1,4 +1,5 @@
 package com.rumaruka.riskofmine.common.inventory.slots;
+
 import com.rumaruka.riskofmine.common.items.BaseCollectablesItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
@@ -12,6 +13,6 @@ public class TripleSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return   stack.getItem() instanceof BaseCollectablesItem;
+        return stack.getItem() instanceof BaseCollectablesItem;
     }
 }

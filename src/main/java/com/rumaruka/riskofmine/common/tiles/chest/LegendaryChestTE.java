@@ -9,13 +9,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class LegendaryChestTE extends GenericChestTE{
+public class LegendaryChestTE extends GenericChestTE {
     public LegendaryChestTE(BlockPos blockPos, BlockState blockState) {
         super(ROMTiles.LEGENDARY_CHEST, blockPos, blockState, Chest.LEGENDARY, ROMBlocks.LEGENDARY_CHEST);
     }
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return ChestInventory.createLegendaryContainer(pContainerId,pInventory,this);
+        return ChestInventory.createLegendaryContainer(pContainerId, pInventory, this);
     }
 }

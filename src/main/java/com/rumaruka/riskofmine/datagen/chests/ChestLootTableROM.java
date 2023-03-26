@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.BiConsumer;
 
-public class ChestLootTableROM implements LootTableSubProvider{
+public class ChestLootTableROM implements LootTableSubProvider {
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
         consumer.accept(ROMLootTables.SMALL_CHEST, LootTable.lootTable()
@@ -27,6 +27,6 @@ public class ChestLootTableROM implements LootTableSubProvider{
                         .add(LootItem.lootTableItem(ROMItems.GASOLINE).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(ROMItems.MONSTER_TOOTH).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                         .add(LootItem.lootTableItem(ROMItems.STUN_GRENADE).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                        .add(LootItem.lootTableItem(ROMItems.TRI_TIP_DAGGER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1,1))))));
+                        .add(LootItem.lootTableItem(ROMItems.TRI_TIP_DAGGER).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1))))));
     }
 }

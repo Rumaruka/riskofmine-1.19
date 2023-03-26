@@ -45,14 +45,13 @@ public class BustlingFungusItem extends BaseCollectablesItem {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (!pLevel.isClientSide()){
-            if(!MovingHandler.isMoving((Player) pEntity)){
+        if (!pLevel.isClientSide()) {
+            if (!MovingHandler.isMoving((Player) pEntity)) {
                 ((Player) pEntity).heal((pStack.getCount() + 0.045f) / 20f);
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
-
 
 
     @Override
@@ -74,9 +73,6 @@ public class BustlingFungusItem extends BaseCollectablesItem {
         }
         super.curioTick(slotContext, stack);
     }
-
-
-
 
 
     @Override

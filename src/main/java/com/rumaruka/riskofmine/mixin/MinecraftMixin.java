@@ -1,11 +1,8 @@
 package com.rumaruka.riskofmine.mixin;
 
-import com.rumaruka.riskofmine.api.entity.IOverloading;
-import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

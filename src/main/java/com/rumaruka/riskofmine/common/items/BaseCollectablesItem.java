@@ -14,7 +14,7 @@ public class BaseCollectablesItem extends Item implements ICurioItem {
     private final int sizeStack;
 
 
-    public BaseCollectablesItem(Types type, Category category,int size) {
+    public BaseCollectablesItem(Types type, Category category, int size) {
         super(new Properties().stacksTo(size));
         this.type = type;
         this.categoryEnum = category;
@@ -26,9 +26,6 @@ public class BaseCollectablesItem extends Item implements ICurioItem {
     public int getMaxStackSize(ItemStack stack) {
         return getSizeStack();
     }
-
-
-
 
 
     public int getSizeStack() {

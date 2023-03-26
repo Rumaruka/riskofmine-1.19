@@ -3,11 +3,6 @@ package com.rumaruka.riskofmine.utils;
 import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.api.Category;
 import com.rumaruka.riskofmine.api.entity.IOverloading;
-import com.rumaruka.riskofmine.common.items.BaseCollectablesItem;
-import com.rumaruka.riskofmine.init.ROMEffects;
-import com.rumaruka.riskofmine.init.ROMItems;
-import com.rumaruka.riskofmine.ntw.ROMNetwork;
-import com.rumaruka.riskofmine.ntw.packets.OverloadingPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
@@ -15,7 +10,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -82,10 +76,9 @@ public class ROMUtils {
     }
 
 
-
     public static boolean hasOverloadingOnClient(Entity entity) {
 
-        return ((IOverloading)entity).isOverloading() ;
+        return ((IOverloading) entity).isOverloading();
 
     }
 

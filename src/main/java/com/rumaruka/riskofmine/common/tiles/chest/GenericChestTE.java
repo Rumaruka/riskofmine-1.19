@@ -1,7 +1,7 @@
 package com.rumaruka.riskofmine.common.tiles.chest;
+
 import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.Chest;
-import com.rumaruka.riskofmine.api.Types;
 import com.rumaruka.riskofmine.common.blocks.chest.GenericChestBlock;
 import com.rumaruka.riskofmine.common.inventory.ChestInventory;
 import com.rumaruka.riskofmine.init.ROMSounds;
@@ -10,7 +10,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
@@ -21,16 +20,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestLidController;
-import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
-import net.minecraft.world.level.block.entity.LidBlockEntity;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
+
 public abstract class GenericChestTE extends RandomizableContainerBlockEntity implements LidBlockEntity {
 
     private NonNullList<ItemStack> items;

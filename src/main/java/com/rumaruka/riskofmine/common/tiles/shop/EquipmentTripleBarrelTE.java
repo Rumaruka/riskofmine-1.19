@@ -9,10 +9,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class EquipmentTripleBarrelTE extends GenericShopTE{
+public class EquipmentTripleBarrelTE extends GenericShopTE {
 
     public EquipmentTripleBarrelTE(BlockPos blockPos, BlockState blockState) {
-        super(ROMTiles.EQUIPMENT_TRIPLE_BARREL, blockPos, blockState,Chest.EQUIPMENT_TRIPLE_BARREL, ROMBlocks.EQUIPMENT_TRIPLE_BARREL);
+        super(ROMTiles.EQUIPMENT_TRIPLE_BARREL, blockPos, blockState, Chest.EQUIPMENT_TRIPLE_BARREL, ROMBlocks.EQUIPMENT_TRIPLE_BARREL);
     }
 
     @Override

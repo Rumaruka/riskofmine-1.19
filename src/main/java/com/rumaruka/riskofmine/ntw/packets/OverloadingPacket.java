@@ -1,8 +1,6 @@
 package com.rumaruka.riskofmine.ntw.packets;
 
-import com.rumaruka.riskofmine.RiskOfMine;
 import com.rumaruka.riskofmine.api.entity.IOverloading;
-import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
@@ -10,15 +8,13 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public record OverloadingPacket(int entityId,boolean overloading) {
-
+public record OverloadingPacket(int entityId, boolean overloading) {
 
 
     public OverloadingPacket(FriendlyByteBuf byteBuf) {
-       this(byteBuf.readInt(),byteBuf.readBoolean());
+        this(byteBuf.readInt(), byteBuf.readBoolean());
 
     }
-
 
 
     public void toBytes(FriendlyByteBuf buf) {
@@ -31,7 +27,7 @@ public record OverloadingPacket(int entityId,boolean overloading) {
 
             Entity entity = Minecraft.getInstance().level.getEntity(entityId);
 
-            if (entity instanceof IOverloading over){
+            if (entity instanceof IOverloading over) {
                 over.setOverloading(overloading);
             }
 

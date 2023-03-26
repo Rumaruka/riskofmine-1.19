@@ -2,8 +2,10 @@ package com.rumaruka.riskofmine.client.screen.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.rumaruka.riskofmine.RiskOfMine;
+import com.rumaruka.riskofmine.common.cap.Barrier;
 import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
+import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.mixin.LocalPlayerMixin;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.OverlayPacket;
@@ -49,6 +51,7 @@ public class ROMOverlayRender {
             renderNearbyMoneyDisplay(event.getPoseStack());
             renderNearbyLunarDisplay(event.getPoseStack());
         }
+        renderNearbyBarrierDisplay(event.getPoseStack());
     }
 
     private static void renderNearbyMoneyDisplay(PoseStack stack) {
@@ -78,7 +81,19 @@ public class ROMOverlayRender {
             }
         }
     }
-
+    private static void renderNearbyBarrierDisplay(PoseStack stack) {
+        stack.pushPose();
+        Player player = mc.player;
+        Font font = mc.font;
+        if (player != null && !player.isDeadOrDying() ) {
+            Barrier barrier = Barrier.of(player);
+            if (barrier != null) {
+                String toDisplay = getBarrierDisplay(barrier);
+                Color color = Color.BLUE;
+                DrawHelper.drawString(stack, font, toDisplay, 27.5f, 30, color.getRGB());
+            }
+        }
+    }
     private static String getMoneyDisplay(Money money) {
         int currentMoney = money.getCurrentMoney();
         return I18n.get("riskofmine.currentmoney.name") + currentMoney;
@@ -90,5 +105,9 @@ public class ROMOverlayRender {
         return I18n.get("riskofmine.currentlunar.name") + currentLunar;
 
     }
+    private static String getBarrierDisplay(Barrier lunar) {
+        int barrierCurrent = lunar.getCurrentBarrier();
+        return I18n.get("riskofmine.currentbarrier.name") + barrierCurrent;
 
+    }
 }

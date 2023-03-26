@@ -2,12 +2,12 @@ package com.rumaruka.riskofmine.common.events;
 
 import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
 import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
-import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMParticles;
 import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
+import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.BlockPos;
@@ -279,9 +279,9 @@ public class ItemsEvent {
     public static void onEntityJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player) {
-               if( ROMUtils.checkInventory(player,new ItemStack(ROMItems.HOPOO_FEATHER))){
+            if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
 
-                       ROMDoubleEffect.play(player);
+                ROMDoubleEffect.play(player);
 
 
             }

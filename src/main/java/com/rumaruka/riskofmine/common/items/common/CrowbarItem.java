@@ -31,5 +31,6 @@ public class CrowbarItem extends BaseCollectablesItem {
         if (Screen.hasShiftDown()) {
             tooltip.add(Component.translatable("ror.crow.info"));
             tooltip.add(Component.translatable("[Stacks:" + pStack.getCount() + "]"));
-        }    }
+        }
+    }
 }

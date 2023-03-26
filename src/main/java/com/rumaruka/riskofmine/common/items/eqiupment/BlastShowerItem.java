@@ -25,8 +25,8 @@ import java.util.List;
 
 import static com.rumaruka.riskofmine.utils.ROMUtils.removeNegativeEffect;
 
-public class BlastShowerItem extends EquipmentBase{
-    public BlastShowerItem( ) {
+public class BlastShowerItem extends EquipmentBase {
+    public BlastShowerItem() {
         super(Category.UTILITY);
         //cooldownMinus= ROMItems.ALIEN_HEAD.cooldownMinus;
     }
@@ -60,7 +60,8 @@ public class BlastShowerItem extends EquipmentBase{
         }
 
         MinecraftForge.EVENT_BUS.unregister(new ProjectileRemoveEvent());
-        return new InteractionResultHolder<>(InteractionResult.SUCCESS, pPlayer.getItemInHand(pUsedHand));    }
+        return new InteractionResultHolder<>(InteractionResult.SUCCESS, pPlayer.getItemInHand(pUsedHand));
+    }
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag pIsAdvanced) {

@@ -16,7 +16,6 @@ import com.rumaruka.riskofmine.common.items.voiditems.SaferSpacesItem;
 import com.rumaruka.riskofmine.common.items.voiditems.TentabaubleItem;
 import com.rumaruka.riskofmine.common.items.voiditems.WeepingFungusItem;
 import net.minecraft.world.item.Item;
-import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
 import ru.timeconqueror.timecore.api.registry.ItemRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
@@ -47,7 +46,7 @@ public class ROMItems {
     public static OldWarStealthkitItem OLD_WAR_STEALTHKIT = promise();
     public static TriTipDaggerItem TRI_TIP_DAGGER = promise();
 
-    public static HopooFeatherItem HOPOO_FEATHER =promise();
+    public static HopooFeatherItem HOPOO_FEATHER = promise();
     public static StunGrenadeItem STUN_GRENADE = promise();
     //    //    public static  WarbannerItem WARBANNER   ;
 //    //public static TheCrowdFunderItem THE_CROWDFUNDER   ;
@@ -69,10 +68,6 @@ public class ROMItems {
 
 
     public static LunarCoinItem LUNAR_COIN = promise();
-
-
-
-
 
 
     private static class Init {

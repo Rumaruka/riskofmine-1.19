@@ -7,8 +7,6 @@ import com.rumaruka.riskofmine.init.ROMTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class LunarChestTE extends GenericChestTE {
@@ -18,6 +16,6 @@ public class LunarChestTE extends GenericChestTE {
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return ChestInventory.createLunarContainer(pContainerId,pInventory,this);
+        return ChestInventory.createLunarContainer(pContainerId, pInventory, this);
     }
 }

@@ -1,14 +1,16 @@
 package com.rumaruka.riskofmine.ntw;
+
 import com.rumaruka.riskofmine.ntw.helper.IThreadsafePacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-public class InventoryTopStacksSyncPacket  implements IThreadsafePacket {
+
+public class InventoryTopStacksSyncPacket implements IThreadsafePacket {
 
     private final BlockPos pos;
     private final NonNullList<ItemStack> topStacks;
@@ -62,10 +64,10 @@ public class InventoryTopStacksSyncPacket  implements IThreadsafePacket {
 
                 if (te != null) {
 
-                        Minecraft.getInstance().levelRenderer.blockChanged(null, packet.pos, null, null, 0);
-                    }
+                    Minecraft.getInstance().levelRenderer.blockChanged(null, packet.pos, null, null, 0);
                 }
             }
         }
     }
+}
 

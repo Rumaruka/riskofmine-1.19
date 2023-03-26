@@ -62,7 +62,7 @@ public class RiskOfMine {
 
         });
         eventBus.addListener(ROMOverlayRender::registerKeys);
-        logger.info("Network Risk Of Mine setuping");
+        logger.info("Network Risk Of Mine setup");
         ROMNetwork.setup();
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);

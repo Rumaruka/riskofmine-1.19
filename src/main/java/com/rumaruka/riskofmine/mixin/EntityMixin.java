@@ -8,15 +8,17 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements IOverloading {
-    @Shadow public abstract int getId();
+    @Shadow
+    public abstract int getId();
 
-    @Shadow public Level level;
+    @Shadow
+    public Level level;
     private boolean isOverloading;
+
     @Override
     public boolean isOverloading() {
 
@@ -25,11 +27,11 @@ public abstract class EntityMixin implements IOverloading {
 
     @Override
     public void setOverloading(boolean isOver) {
-        if(isOver != isOverloading &&!level.isClientSide()){
-            ROMNetwork.network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(()->(Entity)(Object) this),new OverloadingPacket(this.getId(),isOver));
+        if (isOver != isOverloading && !level.isClientSide()) {
+            ROMNetwork.network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (Entity) (Object) this), new OverloadingPacket(this.getId(), isOver));
 
         }
-        isOverloading=isOver;
+        isOverloading = isOver;
     }
 
 }

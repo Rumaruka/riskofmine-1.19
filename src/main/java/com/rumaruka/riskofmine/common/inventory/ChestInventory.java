@@ -1,6 +1,6 @@
 package com.rumaruka.riskofmine.common.inventory;
+
 import com.rumaruka.riskofmine.api.Chest;
-import com.rumaruka.riskofmine.api.Types;
 import com.rumaruka.riskofmine.common.inventory.slots.SingleSlot;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import net.minecraft.world.Container;
@@ -13,13 +13,11 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import org.jetbrains.annotations.NotNull;
-
-public class ChestInventory  extends AbstractContainerMenu {
+public class ChestInventory extends AbstractContainerMenu {
     private final Container container;
 
     private final Chest chestType;
@@ -28,36 +26,36 @@ public class ChestInventory  extends AbstractContainerMenu {
         this(menuType, containerId, playerInventory, new SimpleContainer(Chest.NULL_SIZE.size), Chest.NULL_SIZE);
     }
 
-    public static @NotNull ChestInventory createLunarContainer(int windowId, Inventory  playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, new SimpleContainer(Chest.LUNAR.size), Chest .LUNAR);
+    public static @NotNull ChestInventory createLunarContainer(int windowId, Inventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, new SimpleContainer(Chest.LUNAR.size), Chest.LUNAR);
     }
 
-    public static ChestInventory createLunarContainer(int windowId, Inventory  playerInventory, Container  inventory) {
-        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, inventory, Chest .LUNAR);
+    public static ChestInventory createLunarContainer(int windowId, Inventory playerInventory, Container inventory) {
+        return new ChestInventory(ROMContainerTypes.LUNAR_CHEST, windowId, playerInventory, inventory, Chest.LUNAR);
     }
 
 
-    public static @NotNull ChestInventory createLegendaryContainer(int windowId, Inventory  playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, new SimpleContainer(Chest .LEGENDARY.size), Chest .LEGENDARY);
+    public static @NotNull ChestInventory createLegendaryContainer(int windowId, Inventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, new SimpleContainer(Chest.LEGENDARY.size), Chest.LEGENDARY);
     }
 
-    public static ChestInventory createLegendaryContainer(int windowId, Inventory  playerInventory, Container  inventory) {
-        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, inventory, Chest .LEGENDARY);
+    public static ChestInventory createLegendaryContainer(int windowId, Inventory playerInventory, Container inventory) {
+        return new ChestInventory(ROMContainerTypes.LEGENDARY_CHEST, windowId, playerInventory, inventory, Chest.LEGENDARY);
     }
 
-    public static @NotNull ChestInventory createLargeContainer(int windowId, Inventory  playerInventory) {
-        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, new SimpleContainer(Chest .LARGE.size), Chest .LARGE);
+    public static @NotNull ChestInventory createLargeContainer(int windowId, Inventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, new SimpleContainer(Chest.LARGE.size), Chest.LARGE);
     }
 
-    public static ChestInventory createLargeContainer(int windowId, Inventory  playerInventory, Container  inventory) {
-        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, inventory, Chest .LARGE);
+    public static ChestInventory createLargeContainer(int windowId, Inventory playerInventory, Container inventory) {
+        return new ChestInventory(ROMContainerTypes.LARGE_CHEST, windowId, playerInventory, inventory, Chest.LARGE);
     }
 
-    public static @NotNull ChestInventory createCommonContainer(int windowId, Inventory  playerInventory) {
-        return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, new SimpleContainer(Chest.SMALL.size), Chest .SMALL);
+    public static @NotNull ChestInventory createCommonContainer(int windowId, Inventory playerInventory) {
+        return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, new SimpleContainer(Chest.SMALL.size), Chest.SMALL);
     }
 
-    public static ChestInventory createCommonContainer(int windowId, Inventory  playerInventory, Container  inventory) {
+    public static ChestInventory createCommonContainer(int windowId, Inventory playerInventory, Container inventory) {
         return new ChestInventory(ROMContainerTypes.SMALL_CHEST, windowId, playerInventory, inventory, Chest.SMALL);
     }
 
@@ -71,7 +69,7 @@ public class ChestInventory  extends AbstractContainerMenu {
 
         inventory.startOpen(playerInventory.player);
 
-        if (chestType == Chest .SMALL || chestType == Chest .LARGE || chestType ==Chest .DAMAGE||chestType ==Chest .HEALING||chestType ==Chest .EQUIPMENT_BARREL||chestType ==Chest .LUNAR||chestType ==Chest .RUSTY||chestType ==Chest .UTILITY) {
+        if (chestType == Chest.SMALL || chestType == Chest.LARGE || chestType == Chest.DAMAGE || chestType == Chest.HEALING || chestType == Chest.EQUIPMENT_BARREL || chestType == Chest.LUNAR || chestType == Chest.RUSTY || chestType == Chest.UTILITY) {
             this.addSlot(new SingleSlot(inventory, 0, 12 + 4 * 18, 8 + 2 * 18));
         } else {
             for (int chestRow = 0; chestRow < chestType.getRowCount(); chestRow++) {

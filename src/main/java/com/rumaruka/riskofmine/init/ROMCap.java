@@ -1,8 +1,10 @@
 package com.rumaruka.riskofmine.init;
 
+import com.rumaruka.riskofmine.common.cap.Barrier;
 import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
 import com.rumaruka.riskofmine.common.cap.Timer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,13 +20,14 @@ import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ROMCap {
 
+
     @AutoRegistrable
     private static final CapabilityRegister REGISTER = new CapabilityRegister(MODID);
 
     public static final Capability<Money> MONEY = REGISTER.register(Money.class);
     public static final Capability<Lunar> LUNAR = REGISTER.register(Lunar.class);
     public static final Capability<Timer> TIMER = REGISTER.register(Timer.class);
-
+    public static final Capability<Barrier> BARRIER = REGISTER.register(Barrier.class);
 
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -36,7 +39,13 @@ public class ROMCap {
             }
         });
 
-
+        event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, BARRIER, entity -> entity instanceof LivingEntity, entity -> new Barrier((LivingEntity) entity)));
+        CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
+            Barrier cap = Barrier.of(entity);
+            if (cap != null) {
+                cap.sendAllData();
+            }
+        });
         event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, LUNAR, entity -> entity instanceof Player, entity -> new Lunar(((Player) entity))));
         CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
             Lunar cap = Lunar.of(entity);

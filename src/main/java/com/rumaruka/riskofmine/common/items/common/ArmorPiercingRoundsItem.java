@@ -31,5 +31,6 @@ public class ArmorPiercingRoundsItem extends BaseCollectablesItem {
         if (Screen.hasShiftDown()) {
             tooltip.add(Component.translatable("ror.apr.info"));
             tooltip.add(Component.translatable("[Stacks:" + pStack.getCount() + "]"));
-        }    }
+        }
+    }
 }

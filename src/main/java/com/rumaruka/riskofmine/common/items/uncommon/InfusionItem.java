@@ -15,8 +15,9 @@ import java.util.UUID;
 
 public class InfusionItem extends BaseCollectablesItem {
     public static final UUID uuid1 = UUID.randomUUID();
+
     public InfusionItem() {
-        super(Types.UNCOMMON,Category.UTILITY,64);
+        super(Types.UNCOMMON, Category.UTILITY, 64);
     }
 
     @Override

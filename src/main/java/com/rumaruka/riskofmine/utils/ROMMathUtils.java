@@ -2,9 +2,9 @@ package com.rumaruka.riskofmine.utils;
 
 public class ROMMathUtils {
 
-/*
- Math Utils class
- */
+    /*
+     Math Utils class
+     */
     public static double summ(double x, double y) {
         return x + y;
 

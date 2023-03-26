@@ -18,7 +18,7 @@ public class TimerEvents {
             Level level = player.getLevel();
             if (!level.isClientSide()) {
                 Timer timer = Timer.of(player);
-                if (player.tickCount % 2==0){
+                if (player.tickCount % 2 == 0) {
                     if (timer != null) {
                         timer.addTime(0);
                     }
