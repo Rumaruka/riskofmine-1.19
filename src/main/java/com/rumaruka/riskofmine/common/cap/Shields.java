@@ -1,7 +1,6 @@
 package com.rumaruka.riskofmine.common.cap;
 
 import com.rumaruka.riskofmine.init.ROMCap;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,22 +14,21 @@ import ru.timeconqueror.timecore.common.capability.CoffeeCapabilityInstance;
 import ru.timeconqueror.timecore.common.capability.owner.CapabilityOwner;
 import ru.timeconqueror.timecore.common.capability.owner.serializer.CapabilityOwnerCodec;
 import ru.timeconqueror.timecore.common.capability.property.CoffeeProperty;
-import ru.timeconqueror.timecore.common.capability.property.serializer.FloatPropertySerializer;
 import ru.timeconqueror.timecore.common.capability.property.serializer.IntPropertySerializer;
 
-public class Barrier extends CoffeeCapabilityInstance<Entity> {
-    public final CoffeeProperty<Integer> barrier = prop("barrier", 0, IntPropertySerializer.INSTANCE).synced();
+public class Shields extends CoffeeCapabilityInstance<Entity> {
+    public final CoffeeProperty<Integer> shields = prop("shields", 0, IntPropertySerializer.INSTANCE).synced();
 
     private final LivingEntity target;
 
-    public Barrier(LivingEntity target) {
+    public Shields(LivingEntity target) {
         this.target = target;
     }
 
     @NotNull
     @Override
     public Capability<? extends CoffeeCapabilityInstance<Entity>> getCapability() {
-        return ROMCap.BARRIER;
+        return ROMCap.SHIELDS;
     }
 
     @NotNull
@@ -47,10 +45,10 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
 
     }
 
-    public boolean consumeBarrier(Player player, int price) {
+    public boolean consumeShields(Player player, int price) {
         if (!player.isCreative()) {
-            if (hasBarrier()) {
-                setBarrier(getCurrentBarrier() - price);
+            if (hasShields()) {
+                setShields(getCurrentShields() - price);
 
                 return true;
             }
@@ -60,39 +58,41 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
         return true;
     }
 
-    public void setBarrier(int value) {
-        if (getCurrentBarrier() != value) {
-            barrier.set(value);
+    public void setShields(int value) {
+        if (getCurrentShields() != value) {
+            shields.set(value);
         }
     }
-    public void setBarrierMinus(int value) {
-        if (getCurrentBarrier() != value) {
-            barrier.set(-value);
+    public void setShieldsMinus(int value) {
+        if (getCurrentShields() != value ) {
+            shields.set(-value);
         }
     }
-    public static int getMaxBarrier(LivingEntity player) {
+    public static int getMaxShields(LivingEntity player) {
         return Integer.MAX_VALUE;
     }
 
-    public void addBarrier(int value) {
+    public void addShields(int value) {
 
-        setBarrier(Math.min(getCurrentBarrier() + value, getMaxBarrier(target)));
+        setShields(Math.min(getCurrentShields() + value, getMaxShields(target)));
     }
 
-    public void removeBarrier(int value) {
+    public void removeShields(int value) {
 
-        setBarrier(Math.min(getCurrentBarrier() - value, getMaxBarrier(target)));
+        setShields(Math.min(getCurrentShields() - value, getMaxShields(target)));
     }
 
-    public boolean hasBarrier() {
-        return getCurrentBarrier() >= 0;
+    public boolean hasShields() {
+        return getCurrentShields() >= 0;
     }
 
-    public int getCurrentBarrier() {
+    public int getCurrentShields() {
 
-        return barrier.get();
+        return shields.get();
     }
-
+    public boolean getNullShields(){
+        return shields.get() == 0;
+    }
     public void detectAndSendChanges() {
         detectAndSendChanges(target.level, target);
     }
@@ -102,8 +102,8 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
     }
 
     @Nullable
-    public static Barrier of(LivingEntity player) {
-        LazyOptional<Barrier> cap = player.getCapability(ROMCap.BARRIER);
+    public static Shields of(LivingEntity player) {
+        LazyOptional<Shields> cap = player.getCapability(ROMCap.SHIELDS);
         if (cap.isPresent()) {
             return cap.orElseThrow(IllegalStateException::new);
         }

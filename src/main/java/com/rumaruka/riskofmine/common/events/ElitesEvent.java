@@ -1,7 +1,7 @@
 package com.rumaruka.riskofmine.common.events;
 
 import com.rumaruka.riskofmine.api.entity.IOverloading;
-import com.rumaruka.riskofmine.common.cap.Barrier;
+import com.rumaruka.riskofmine.common.cap.Shields;
 import com.rumaruka.riskofmine.common.cap.Timer;
 import com.rumaruka.riskofmine.common.entity.MalachiteUrchinsEntity;
 import com.rumaruka.riskofmine.init.ROMEffects;
@@ -63,16 +63,16 @@ public class ElitesEvent {
                     }
                 }
             }
-            Barrier mainBarrier = Barrier.of(entity);
-            if (mainBarrier != null) {
-                ((IOverloading) entity).setOverloading(entity.hasEffect(ROMEffects.OVERLOADING.get()) || mainBarrier.getCurrentBarrier() > 0);
+            Shields mainShields = Shields.of(entity);
+            if (mainShields != null) {
+                ((IOverloading) entity).setOverloading(entity.hasEffect(ROMEffects.OVERLOADING.get()) || mainShields.getCurrentShields() > 0);
 
             }
             if (entity.hasEffect(ROMEffects.OVERLOADING.get())) {
-                Barrier barrier = Barrier.of(entity);
-                if (barrier != null) {
-                    barrier.setBarrier(5);
-                    barrier.detectAndSendChanges();
+                Shields shields = Shields.of(entity);
+                if (shields != null) {
+                    shields.setShields(5);
+                    shields.detectAndSendChanges();
                 }
             }
             if (entity.hasEffect(ROMEffects.MALACHITE_ELITES.get())) {

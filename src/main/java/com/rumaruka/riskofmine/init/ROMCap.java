@@ -1,6 +1,6 @@
 package com.rumaruka.riskofmine.init;
 
-import com.rumaruka.riskofmine.common.cap.Barrier;
+import com.rumaruka.riskofmine.common.cap.Shields;
 import com.rumaruka.riskofmine.common.cap.Lunar;
 import com.rumaruka.riskofmine.common.cap.Money;
 import com.rumaruka.riskofmine.common.cap.Timer;
@@ -27,7 +27,7 @@ public class ROMCap {
     public static final Capability<Money> MONEY = REGISTER.register(Money.class);
     public static final Capability<Lunar> LUNAR = REGISTER.register(Lunar.class);
     public static final Capability<Timer> TIMER = REGISTER.register(Timer.class);
-    public static final Capability<Barrier> BARRIER = REGISTER.register(Barrier.class);
+    public static final Capability<Shields> SHIELDS = REGISTER.register(Shields.class);
 
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -39,9 +39,9 @@ public class ROMCap {
             }
         });
 
-        event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, BARRIER, entity -> entity instanceof LivingEntity, entity -> new Barrier((LivingEntity) entity)));
+        event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, SHIELDS, entity -> entity instanceof LivingEntity, entity -> new Shields((LivingEntity) entity)));
         CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
-            Barrier cap = Barrier.of(entity);
+            Shields cap = Shields.of(entity);
             if (cap != null) {
                 cap.sendAllData();
             }
