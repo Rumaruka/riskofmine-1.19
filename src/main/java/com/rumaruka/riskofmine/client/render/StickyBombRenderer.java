@@ -1,7 +1,7 @@
 package com.rumaruka.riskofmine.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
+import com.rumaruka.riskofmine.common.entity.misc.StickyBombEntity;
 import com.rumaruka.riskofmine.init.ROMModels;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;

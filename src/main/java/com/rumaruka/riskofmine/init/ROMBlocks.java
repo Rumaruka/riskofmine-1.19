@@ -1,12 +1,14 @@
 package com.rumaruka.riskofmine.init;
 
 import com.rumaruka.riskofmine.ModSetup;
+import com.rumaruka.riskofmine.common.blocks.WarbannerBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.LargeChestBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.LegendaryChestBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.LunarChestBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.SmallChestBlock;
 import com.rumaruka.riskofmine.common.blocks.shop.EquipmentTripleBarrelBlock;
 import com.rumaruka.riskofmine.common.blocks.shop.MultiShopBlock;
+import com.rumaruka.riskofmine.common.items.common.WarbannerItem;
 import ru.timeconqueror.timecore.api.registry.BlockRegister;
 import ru.timeconqueror.timecore.api.registry.util.AutoRegistrable;
 
@@ -20,6 +22,8 @@ public class ROMBlocks {
     public static LegendaryChestBlock LEGENDARY_CHEST = promise();
     public static LunarChestBlock LUNAR_CHEST = promise();
     public static MultiShopBlock MULTI_SHOP = promise();
+
+    public static WarbannerBlock WARBANNER_BLOCK = promise();
     public static EquipmentTripleBarrelBlock EQUIPMENT_TRIPLE_BARREL = promise();
 
     @AutoRegistrable
@@ -31,6 +35,7 @@ public class ROMBlocks {
         REGISTER.register("large_chest", LargeChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(() -> ModSetup.MAIN);
         REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(() -> ModSetup.MAIN);
         REGISTER.register("lunar_chest", LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(() -> ModSetup.MAIN);
+        REGISTER.register("warbanner_block", WarbannerBlock::new).oneVarStateAndCubeAllModel();
 
 
         REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(() -> ModSetup.MAIN);

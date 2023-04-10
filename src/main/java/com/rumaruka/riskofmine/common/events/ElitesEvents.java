@@ -6,7 +6,6 @@ import com.rumaruka.riskofmine.common.cap.Timer;
 import com.rumaruka.riskofmine.common.entity.MalachiteUrchinsEntity;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.utils.ROMUtils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +20,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class ElitesEvent {
+public class ElitesEvents {
+
     @SubscribeEvent
     public static void addEffect(LivingEvent.LivingTickEvent event) {
         LivingEntity entity = event.getEntity();
@@ -51,9 +51,10 @@ public class ElitesEvent {
         if (!level.isClientSide()) {
             if (entity.hasEffect(ROMEffects.MENDING.get())) {
                 List<LivingEntity> entities = level.getEntitiesOfClass(
-                        LivingEntity.class, new AABB(new BlockPos(entity.getX() + 2, entity.getY(), entity.getZ() + 2))
+                        LivingEntity.class, new AABB(entity.getX() + 2, entity.getY() + 1, entity.getZ() + 2, entity.getX() - 2, entity.getY() + 2, entity.getZ() - 2)
                 );
                 for (LivingEntity anotherEntity : entities) {
+
                     if (!(entity instanceof Player)) {
 
 
@@ -61,20 +62,16 @@ public class ElitesEvent {
 
 
                     }
+
+
                 }
             }
             Shields mainShields = Shields.of(entity);
             if (mainShields != null) {
-                ((IOverloading) entity).setOverloading(entity.hasEffect(ROMEffects.OVERLOADING.get()) || mainShields.getCurrentShields() > 0);
+                ((IOverloading) entity).setOverloading(mainShields.getCurrentShields() > 0);
 
             }
-            if (entity.hasEffect(ROMEffects.OVERLOADING.get())) {
-                Shields shields = Shields.of(entity);
-                if (shields != null) {
-                    shields.setShields(5);
-                    shields.detectAndSendChanges();
-                }
-            }
+
             if (entity.hasEffect(ROMEffects.MALACHITE_ELITES.get())) {
 
                 if (entity.tickCount % 25 == 0) {
@@ -103,12 +100,14 @@ public class ElitesEvent {
     @SubscribeEvent
     public static void removeHealthIfEffects(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity instanceof Player player) {
-            if (player.hasEffect(ROMEffects.MALACHITE.get())) {
-                event.setCanceled(true);
-            }
+
+        if (entity.hasEffect(ROMEffects.MALACHITE.get())) {
+            event.setCanceled(true);
         }
+
     }
+
+
 }
 
 

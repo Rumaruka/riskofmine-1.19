@@ -1,10 +1,9 @@
-package com.rumaruka.riskofmine.common.entity;
+package com.rumaruka.riskofmine.common.entity.misc;
 
 import com.rumaruka.riskofmine.events.PlayerHealthEvent;
 import com.rumaruka.riskofmine.init.ROMEntity;
 import com.rumaruka.riskofmine.init.ROMItems;
 import com.rumaruka.riskofmine.init.ROMSounds;
-import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

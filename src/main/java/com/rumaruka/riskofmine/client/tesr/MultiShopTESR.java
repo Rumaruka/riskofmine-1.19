@@ -26,6 +26,7 @@ public class MultiShopTESR implements BlockEntityRenderer<MultiShopTE> {
         this.model.renderType(texture);
         pPoseStack.pushPose();
         pPoseStack.translate(0.5F, 0.01f, 0.5);
+
         pPoseStack.scale(1.25f, 2f, 1.25f);
         model.renderToBuffer(pPoseStack, pBufferSource.getBuffer(model.renderType(texture)), pPackedLight, pPackedOverlay, 1, 1, 1, 1);
 
@@ -35,4 +36,6 @@ public class MultiShopTESR implements BlockEntityRenderer<MultiShopTE> {
     private ResourceLocation getMultiShopOpenTexture(MultiShopTE tileEntityIn) {
         return rl("textures/tile/multi_shop_open.png");
     }
+
+
 }

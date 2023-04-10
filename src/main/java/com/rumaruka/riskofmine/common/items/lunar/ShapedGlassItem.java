@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.rumaruka.riskofmine.api.Category;
 import com.rumaruka.riskofmine.api.Types;
+import com.rumaruka.riskofmine.common.cap.Shields;
 import com.rumaruka.riskofmine.common.items.BaseCollectablesItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -31,6 +32,7 @@ public class ShapedGlassItem extends BaseCollectablesItem {
         if (!pLevel.isClientSide()) {
             Player playerEntity = (Player) pEntity;
             if (playerEntity.getOffhandItem().getItem() == this) {
+
                 playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(EquipmentSlot.OFFHAND, pStack));
 
             }
@@ -43,11 +45,25 @@ public class ShapedGlassItem extends BaseCollectablesItem {
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity livingEntity = slotContext.entity();
+
         if (!livingEntity.level.isClientSide()) {
             Player playerEntity = (Player) livingEntity;
+
             playerEntity.getAttributes().addTransientAttributeModifiers(this.getAttributeModifiers(slotContext, playerEntity.getUUID(), stack));
+            curioShields(playerEntity);
         }
         super.curioTick(slotContext, stack);
+    }
+
+    private void curioShields(Player player) {
+        Shields shields = Shields.of(player);
+        if (shields != null) {
+            if (!shields.isHurt() && player.hurtTime == 0) {
+
+                shields.setShields(16);
+            }
+            shields.detectAndSendChanges();
+        }
     }
 
     @Override

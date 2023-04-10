@@ -3,7 +3,7 @@ package com.rumaruka.riskofmine.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.ExperienceOrb;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 

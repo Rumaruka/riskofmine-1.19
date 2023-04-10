@@ -46,7 +46,7 @@ public class SmallChestBlock extends GenericChestBlock{
                    PiglinAi.angerNearbyPiglins(player, true);
                }else if (money != null && money.getCurrentMoney() < ROMConfig.GENERAL.priceSmallChest.get()) {
                    level.playSound(null, blockPos, ROMSounds.ROM_CHEST_NOT_MONEY.get(), SoundSource.BLOCKS, 2.0F, 1.0F);
-                   player.displayClientMessage(Component.translatable("riskofmine.not_money"), true);
+                   player.displayClientMessage(Component.translatable("riskofmine.not_money"+ROMConfig.GENERAL.priceSmallChest.get()), true);
 
                }
 

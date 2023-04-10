@@ -1,14 +1,12 @@
 package com.rumaruka.riskofmine.utils;
 
-import com.google.common.collect.Lists;
-import com.rumaruka.riskofmine.api.Category;
 import com.rumaruka.riskofmine.api.entity.IOverloading;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,11 +15,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.MinecraftForge;
 import top.theillusivec4.curios.api.CuriosApi;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -29,11 +26,11 @@ public class ROMUtils {
 
 
     private static MobEffectCategory category;
-    private final List<Category> categoryEnum = Lists.newArrayList();
+
     private static final Minecraft mc = Minecraft.getInstance();
     public static int durOld;
+    public static int valueShields=5;
 
-    public static HashMap<EntityType<?>, Color> outlinedEntityTypes = new HashMap<>();
 
     public static Minecraft getMc() {
         return mc;
@@ -47,10 +44,15 @@ public class ROMUtils {
         return mc.player;
     }
 
-
-    public boolean hasCategory(Category categoryEnum) {
-        return this.categoryEnum.contains(categoryEnum);
+    public static int getValueShields() {
+        return valueShields;
     }
+
+    public static int getShieldShapedGlass(){
+        return 16;
+    }
+
+
 
 
     public static int getDurOld() {
@@ -73,6 +75,11 @@ public class ROMUtils {
 
         }
 
+    }
+
+    public static boolean isGiveDamage(LivingEntity entity){
+        float health = Math.min(entity.getHealth(), entity.getMaxHealth());
+        return health<entity.getMaxHealth();
     }
 
 

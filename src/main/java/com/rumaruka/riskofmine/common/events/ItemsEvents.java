@@ -1,10 +1,11 @@
 package com.rumaruka.riskofmine.common.events;
 
-import com.rumaruka.riskofmine.common.entity.HealthOrbEntity;
-import com.rumaruka.riskofmine.common.entity.StickyBombEntity;
-import com.rumaruka.riskofmine.init.ROMItems;
-import com.rumaruka.riskofmine.init.ROMParticles;
-import com.rumaruka.riskofmine.init.ROMSounds;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import com.rumaruka.riskofmine.common.cap.Shields;
+import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
+import com.rumaruka.riskofmine.common.entity.misc.StickyBombEntity;
+import com.rumaruka.riskofmine.init.*;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
@@ -16,8 +17,12 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -27,13 +32,25 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
+
+import java.text.AttributedString;
+import java.util.UUID;
+
+
 
 @Mod.EventBusSubscriber
-public class ItemsEvent {
+public class ItemsEvents {
+
+    public static final UUID healthModifierID = UUID.fromString("208b4d4c-50ef-4b45-a097-4bed633cdbff");
+    private static final UUID BASE_ATTACK_DAMAGE_UUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
+
+
     /**
      * onPlayerHurt  - for hurt entites without Player event
      */
@@ -103,6 +120,17 @@ public class ItemsEvent {
             }
 
         }
+    }
+
+
+    @SubscribeEvent
+    public static void onPlayerLevelUp(PlayerXpEvent.LevelChange event) {
+        Player entity = event.getEntity();
+        if (ROMUtils.checkInventory(entity, new ItemStack(ROMItems.WARBANNER))) {
+            entity.level.setBlock(entity.blockPosition(), ROMBlocks.WARBANNER_BLOCK.defaultBlockState(), 2);
+        }
+
+
     }
 
 
@@ -255,25 +283,27 @@ public class ItemsEvent {
                 }
 
 
-                if (livingEntity instanceof Mob) {
-                    float distance = player.distanceTo(livingEntity);
-                    if (CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).isPresent()) {
-                        ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).get().stack();
-                        ;
-                        if (curioStack.getItem() == ROMItems.FOCUS_CRYSTAL) {
+                if (CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).isPresent()) {
+                    ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).get().stack();
+                    ;
+                    if (livingEntity instanceof Mob) {
+                        float distance = player.distanceTo(livingEntity);
 
-                            if (distance <= 3.5) {
-                                livingEntity.hurt(DamageSource.MAGIC, curioStack.getCount());
-                                ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get(), 20);
-                            }
+                        if (distance <= 3.5) {
+                            livingEntity.hurt(DamageSource.MAGIC, curioStack.getCount());
+                            ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get(), 20);
                         }
-
                     }
+
                 }
 
+
+
             }
+
         }
     }
+
 
     @SubscribeEvent
     public static void onEntityJump(LivingEvent.LivingJumpEvent event) {
@@ -287,4 +317,8 @@ public class ItemsEvent {
             }
         }
     }
+
+
+
+
 }

@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.init;
 import com.google.common.collect.Lists;
 import com.rumaruka.riskofmine.common.items.common.*;
 import com.rumaruka.riskofmine.common.items.eqiupment.BlastShowerItem;
+import com.rumaruka.riskofmine.common.items.eqiupment.TheCrowdFunderItem;
 import com.rumaruka.riskofmine.common.items.gameplay.LunarCoinItem;
 import com.rumaruka.riskofmine.common.items.legendary.AlienHeadItem;
 import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
@@ -48,15 +49,15 @@ public class ROMItems {
 
     public static HopooFeatherItem HOPOO_FEATHER = promise();
     public static StunGrenadeItem STUN_GRENADE = promise();
-    //    //    public static  WarbannerItem WARBANNER   ;
-//    //public static TheCrowdFunderItem THE_CROWDFUNDER   ;
+    public static WarbannerItem WARBANNER = promise();
+    public static TheCrowdFunderItem THE_CROWDFUNDER = promise();
     public static StickyBombItem STICKY_BOMB = promise();
     public static TopazBroochItem TOPAZ_BROOCH = promise();
     public static TentabaubleItem TENTABAUBLE = promise();
     public static BisonSteakItem BISON_STEAK = promise();
 
-    //    // public static CommonItemScrapItem COMMON_ITEM_SCRAP   ;
-//    //  public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP   ;
+    //    // public static CommonItemScrapItem COMMON_ITEM_SCRAP   = promise();
+//    //  public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP   = promise();
 //
     public static WeepingFungusItem WEEPING_FUNGUS = promise();
 
@@ -95,8 +96,8 @@ public class ROMItems {
             REGISTER.register("old_war_stealthkit", OldWarStealthkitItem::new).defaultModel(tl("item/old_war_stealthkit"));
             REGISTER.register("tri_tip_dagger", TriTipDaggerItem::new).defaultModel(tl("item/tri_tip_dagger"));
             REGISTER.register("stun_grenade", StunGrenadeItem::new).defaultModel(tl("item/stun_grenade"));
-//            //  REGISTER.register("warbanner", WarbannerItem::new).defaultModel(tl("item/warbanner"));
-//            //  REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("item/the_crowdfunder"));
+            REGISTER.register("warbanner", WarbannerItem::new).defaultModel(tl("item/warbanner"));
+            REGISTER.register("the_crowdfunder", TheCrowdFunderItem::new).defaultModel(tl("item/the_crowdfunder"));
             REGISTER.register("sticky_bomb", StickyBombItem::new).defaultModel(tl("item/sticky_bomb"));
             REGISTER.register("tentabauble", TentabaubleItem::new).defaultModel(tl("item/tentabauble"));
             REGISTER.register("topaz_brooch", TopazBroochItem::new).defaultModel(tl("item/topaz_broosh"));
@@ -113,8 +114,6 @@ public class ROMItems {
             REGISTER.register("lunar_coin", LunarCoinItem::new);
 
 
-//            REGISTER.register("small_chest.json", () -> new BlockItem(ROMBlocks.SMALL_CHEST, new Item.Properties()));
-//            REGISTER.register("multi_shop", () -> new BlockItem(ROMBlocks.MULTI_SHOP, new Item.Properties()));
         }
     }
 
@@ -139,8 +138,8 @@ public class ROMItems {
                 OLD_WAR_STEALTHKIT,
                 TRI_TIP_DAGGER,
                 STUN_GRENADE,
-                //      WARBANNER,
-                //  THE_CROWDFUNDER,
+                WARBANNER,
+                THE_CROWDFUNDER,
                 STICKY_BOMB,
                 TOPAZ_BROOCH,
                 TENTABAUBLE,

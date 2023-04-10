@@ -31,6 +31,9 @@ public class Money extends CoffeeCapabilityInstance<Entity> {
         return ROMCap.MONEY;
     }
 
+
+
+
     @NotNull
     @Override
     public CapabilityOwnerCodec<Entity> getOwnerSerializer() {

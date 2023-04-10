@@ -1,6 +1,7 @@
 package com.rumaruka.riskofmine.common.cap;
 
 import com.rumaruka.riskofmine.init.ROMCap;
+import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -44,6 +45,9 @@ public class Shields extends CoffeeCapabilityInstance<Entity> {
             channel.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> target), data);
 
     }
+    public boolean isHurt() {
+        return this.getCurrentShields() > 0 && this.getCurrentShields() < 16;
+    }
 
     public boolean consumeShields(Player player, int price) {
         if (!player.isCreative()) {
@@ -68,13 +72,18 @@ public class Shields extends CoffeeCapabilityInstance<Entity> {
             shields.set(-value);
         }
     }
-    public static int getMaxShields(LivingEntity player) {
+    public  int getMaxShields(LivingEntity player) {
         return Integer.MAX_VALUE;
     }
 
     public void addShields(int value) {
 
         setShields(Math.min(getCurrentShields() + value, getMaxShields(target)));
+    }
+    public void addShield(int value) {
+
+        setShields(getCurrentShields()+value);
+
     }
 
     public void removeShields(int value) {
@@ -89,9 +98,6 @@ public class Shields extends CoffeeCapabilityInstance<Entity> {
     public int getCurrentShields() {
 
         return shields.get();
-    }
-    public boolean getNullShields(){
-        return shields.get() == 0;
     }
     public void detectAndSendChanges() {
         detectAndSendChanges(target.level, target);
