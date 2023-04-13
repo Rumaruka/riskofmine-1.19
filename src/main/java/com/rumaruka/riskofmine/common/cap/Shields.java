@@ -18,6 +18,7 @@ import ru.timeconqueror.timecore.common.capability.property.CoffeeProperty;
 import ru.timeconqueror.timecore.common.capability.property.serializer.IntPropertySerializer;
 
 public class Shields extends CoffeeCapabilityInstance<Entity> {
+    @NotNull
     public final CoffeeProperty<Integer> shields = prop("shields", 0, IntPropertySerializer.INSTANCE).synced();
 
     private final LivingEntity target;
@@ -67,11 +68,7 @@ public class Shields extends CoffeeCapabilityInstance<Entity> {
             shields.set(value);
         }
     }
-    public void setShieldsMinus(int value) {
-        if (getCurrentShields() != value ) {
-            shields.set(-value);
-        }
-    }
+
     public  int getMaxShields(LivingEntity player) {
         return Integer.MAX_VALUE;
     }
@@ -80,19 +77,15 @@ public class Shields extends CoffeeCapabilityInstance<Entity> {
 
         setShields(Math.min(getCurrentShields() + value, getMaxShields(target)));
     }
-    public void addShield(int value) {
 
-        setShields(getCurrentShields()+value);
-
-    }
 
     public void removeShields(int value) {
 
-        setShields(Math.min(getCurrentShields() - value, getMaxShields(target)));
+        setShields(Math.max(getCurrentShields() - value, 0));
     }
 
     public boolean hasShields() {
-        return getCurrentShields() >= 0;
+        return getCurrentShields() > 0;
     }
 
     public int getCurrentShields() {

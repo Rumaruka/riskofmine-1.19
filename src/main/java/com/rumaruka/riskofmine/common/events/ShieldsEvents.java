@@ -2,10 +2,12 @@ package com.rumaruka.riskofmine.common.events;
 
 import com.rumaruka.riskofmine.common.cap.Shields;
 import com.rumaruka.riskofmine.init.ROMItems;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,8 +32,7 @@ public class ShieldsEvents {
                         shields.setShields(16);
                     }
                     shields.detectAndSendChanges();
-                }else {
-                    shields.setShields(0);
+
                 }
             }
         }
@@ -39,7 +40,7 @@ public class ShieldsEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void onDamagePlayerWithShield(LivingDamageEvent event) {
+    public static void onDamagePlayerWithShield(LivingHurtEvent event) {
         LivingEntity entity = event.getEntity();
 
 
@@ -49,8 +50,8 @@ public class ShieldsEvents {
                 event.setCanceled(true);
                 shields.removeShields(1);
 
-                if (shields.getCurrentShields() <= 0) {
-                    shields.setShields(0);
+                if (!shields.hasShields()) {
+
                     event.setCanceled(false);
                 }
                 shields.detectAndSendChanges();
@@ -61,6 +62,7 @@ public class ShieldsEvents {
 
 
     }
+
 
 
 }
