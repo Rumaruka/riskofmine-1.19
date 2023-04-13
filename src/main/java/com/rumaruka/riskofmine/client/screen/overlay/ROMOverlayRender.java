@@ -114,4 +114,6 @@ public class ROMOverlayRender {
         return I18n.get("riskofmine.currentshields.name") + shieldsCurrent;
 
     }
+
+
 }
