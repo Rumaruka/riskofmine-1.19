@@ -28,7 +28,6 @@ public class LunarEvents {
                     ItemEntity itemEntity = new ItemEntity(level, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(ROMItems.LUNAR_COIN));
                     level.addFreshEntity(itemEntity);
 
-
                 }
 
 
