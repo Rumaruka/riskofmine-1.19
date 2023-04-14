@@ -45,7 +45,7 @@ public class ROMCap {
             }
         });
 
-        event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, BARRIER, entity -> entity instanceof LivingEntity, entity -> new Barrier((LivingEntity) entity)));
+        event.enqueueWork(() -> CapabilityManagerAPI.registerStaticCoffeeAttacher(CapabilityOwner.ENTITY, BARRIER, entity -> entity instanceof Player, entity -> new Barrier((Player) entity)));
         CapabilityManagerAPI.makePlayerCapSyncOnJoin(entity -> {
             Barrier cap = Barrier.of(entity);
             if (cap != null) {

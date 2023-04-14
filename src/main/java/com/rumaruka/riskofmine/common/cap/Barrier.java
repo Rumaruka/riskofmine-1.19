@@ -2,7 +2,7 @@ package com.rumaruka.riskofmine.common.cap;
 
 import com.rumaruka.riskofmine.init.ROMCap;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -20,9 +20,9 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
     @NotNull
     public final CoffeeProperty<Integer> barrier = prop("barrier", 0, IntPropertySerializer.INSTANCE).synced();
 
-    private final LivingEntity target;
+    private final Player target;
 
-    public Barrier(LivingEntity target) {
+    public Barrier(Player target) {
         this.target = target;
     }
 
@@ -68,7 +68,7 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
         }
     }
 
-    public  int getMaxBarrier(LivingEntity player) {
+    public  int getMaxBarrier(Player player) {
         return Integer.MAX_VALUE;
     }
 
@@ -100,7 +100,7 @@ public class Barrier extends CoffeeCapabilityInstance<Entity> {
     }
 
     @Nullable
-    public static Barrier of(LivingEntity player) {
+    public static Barrier of(Player player) {
         LazyOptional<Barrier> cap = player.getCapability(ROMCap.BARRIER);
         if (cap.isPresent()) {
             return cap.orElseThrow(IllegalStateException::new);

@@ -31,7 +31,7 @@ public class BarrierEvents {
             if (!world.isClientSide()) {
                 if (barrier != null) {
                     if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.TOPAZ_BROOCH))) {
-                        barrier.setBarrier(10 * ROMUtils.counting(player, new ItemStack(ROMItems.TOPAZ_BROOCH)));
+                        barrier.addBarrier(10*ROMUtils.counting(player, new ItemStack(ROMItems.TOPAZ_BROOCH)));
                         barrier.detectAndSendChanges();
                     }
 
@@ -73,7 +73,7 @@ public class BarrierEvents {
             Barrier barrier = Barrier.of(player);
             if (!world.isClientSide()) {
                 if (barrier != null) {
-                    if (barrier.hasBarrier()) {
+                    if (barrier.hasBarrier()&&player.tickCount %10==0) {
                         barrier.removeBarrier(1);
                     }
                     barrier.detectAndSendChanges();
